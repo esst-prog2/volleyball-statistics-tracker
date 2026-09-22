@@ -1,0 +1,6 @@
+row_type,team_1,team_2,set_1_team_1,set_1_team_2,set_2_team_1,set_2_team_2,set_3_team_1,set_3_team_2,set_4_team_1,set_4_team_2,set_5_team_1,set_5_team_2,team,player,points,serve_attempts,serve_errors,serve_aces,reception_attempts,reception_errors,reception_positive_pct,reception_excellent_pct,attack_attempts,attack_errors,attack_blocked,attack_points,block_points
+match,VakifBank ISTANBUL,A. Carraro Prosecco DOC CONEGLIANO,22,25,18,25,29,27,25,23,15,11,,,,,,,,,,,,,,,
+player,,,,,,,,,,,,,VakifBank ISTANBUL,BOŠKOVIĆ Tijana,34,17,2,0,0,0,,,63,2,2,33,1
+player,,,,,,,,,,,,,VakifBank ISTANBUL,MARKOVA Marina,31,18,4,0,34,2,47,21,60,7,2,31,0
+player,,,,,,,,,,,,,A. Carraro Prosecco DOC CONEGLIANO,HAAK Isabelle,20,15,1,0,0,0,,,51,2,3,18,2
+player,,,,,,,,,,,,,A. Carraro Prosecco DOC CONEGLIANO,BRAGA GUIMARAES Gabriela,20,19,0,0,24,1,42,25,40,2,2,20,0

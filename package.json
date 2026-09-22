@@ -1,0 +1,9 @@
+{
+  "name": "volleyball-statistics-tracker",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Offline one-match volleyball CSV report",
+  "scripts": {
+    "test": "node --test"
+  }
+}

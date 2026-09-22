@@ -1,66 +1,46 @@
 # Volleyball Statistics Tracker & Match Analyzer
 
-## 1. The demo
+A local, offline match report for a CSV that you prepare from a volleyball match report. The MVP loads **one match at a time** and shows its score, set scores, team totals, and player statistics. It does not import a CEV URL or compare matches yet.
 
-I open the application and load `match_001.csv`. The match screen shows the final score and the main statistics for both teams, including attack, serve, reception, blocks, points and errors. I select a player and see their individual statistics, including attack efficiency, reception and points. I then select another match and compare the player's performance across the two matches. I can also load a new CSV file and generate the same type of summary.
+## Run the MVP
 
-## 2. The shape
+Open `index.html` in a modern browser, choose a CSV file, and select a player to see their details. No server, account, installation, or internet connection is needed. `samples/cev-82293-selected-players.csv` is a small example based on [CEV match 82293](https://www-old.cev.eu/Competition-Area/MatchStatistics.aspx?ID=82293). It includes selected players from both teams, so its calculated team totals are **partial**, not the official full-team totals.
 
-```text
-in     a CSV file containing match statistics: match, team, player,
-       position and statistics for serves, receptions, attacks and blocks
+Run the checks with `npm test` (Node.js 20 or newer).
 
-out    a match summary, player statistics, team statistics and
-       comparisons between matches
+## CSV format
 
-in between   validate and clean the data; calculate statistics such as
-             attack efficiency and reception percentage; group the data
-             by match, team and player; display the results in tables
+Use UTF-8 CSV with one header row. Column order can vary, and extra columns are ignored. The file has exactly one `match` row and one or more `player` rows. All rows use the same header. Write `0` for a measured count of zero; an empty cell means the value does not apply to that row type. Do not add CEV team-total or set-summary rows as players.
 
-```
+| Column | `match` row | `player` row |
+| --- | --- | --- |
+| `row_type` | `match` | `player` |
+| `team_1`, `team_2` | Two distinct team names | Blank |
+| `set_1_team_1`, `set_1_team_2` through `set_5_team_1`, `set_5_team_2` | Each played set's points, in team 1 / team 2 order; leave later unplayed sets blank | Blank |
+| `team`, `player` | Blank | Team name matching one match team; player name |
+| `points` | Blank | Player's total points |
+| `serve_attempts`, `serve_errors`, `serve_aces` | Blank | Serve counts |
+| `reception_attempts`, `reception_errors` | Blank | Reception counts |
+| `reception_positive_pct`, `reception_excellent_pct` | Blank | Copy CEV's reported numbers without `%`; leave blank if reception attempts are zero |
+| `attack_attempts`, `attack_errors`, `attack_blocked`, `attack_points` | Blank | Attack counts; `attack_points` means successful attacks |
+| `block_points` | Blank | Points scored by blocks |
 
-The project will use fixed formulas for the calculated statistics, documented in the code and README.
+For an unplayed set, leave **both** set columns blank. A played set needs two different nonnegative point values. Three to five consecutive sets must give exactly one team three set wins. Each team should have at least one player row. Player counts must be nonnegative whole numbers. A player's `points` must equal `serve_aces + attack_points + block_points`; the app checks this and other consistency rules before showing a report.
 
-## 3. The size
+The sample file has one match row with VakifBank's five set scores `22, 18, 29, 25, 15` and Conegliano's `25, 25, 27, 23, 11`. Its Tijana Bošković row includes 34 points, 63 attack attempts, 33 attack points, two attack errors, two blocked attacks, and one block point.
 
-**First useful version**
+## Calculations
 
-* import a CSV file with volleyball match statistics
-* check that required columns and values are present
-* calculate attack efficiency, reception percentage, points, blocks and errors
-* show a summary of one match for both teams
-* show the statistics of an individual player
-* compare a player's statistics across several matches
+- Final match score: count the sets won by each team from the set point values.
+- Attack success: `attack_points / attack_attempts × 100`.
+- Attack efficiency: `(attack_points - attack_errors - attack_blocked) / attack_attempts × 100`.
+- Reception error rate: `reception_errors / reception_attempts × 100`.
+- Team totals: sum player counts. Team rates use the summed counts, never an average of player percentages.
 
-**Not this term**
+A rate with zero attempts is shown as unavailable. CEV positive and excellent reception percentages are displayed exactly as entered; the app does not derive their underlying counts or combine the rounded player percentages into a team quality percentage. Team **player points** may be lower than the team's set-point total because opponent errors can award points without crediting a player.
 
-* live statistics during a match
-* automatic statistics from match videos
-* player tracking from video
-* a mobile application
-* user accounts and online sharing
-* predicting match results or player performance with machine learning
-* replacing professional systems such as Data Volley
+## Scope
 
-A CEV importer are optional and will only be added if the main version is working.
+This first version uses manually prepared CSV files and works offline. Later versions may compare players across matches or import CEV pages directly. Live match tracking, video analysis, mobile apps, accounts, online sharing, predictions, and professional-system replacement are outside the current scope.
 
-## 4. How we would know it works
-
-* Given a valid CSV file with one match, the program produces the correct team and player statistics for that match.
-* Given a CSV file with a required column missing, the program reports the missing column instead of producing an incorrect report.
-* Given a player with statistics from several matches, the program calculates the correct results for each match and the player's average.
-
-## 5. What could stop this
-
-* The main risk is the format of the volleyball statistics. Different sources may use different names or formats for the same information. I will therefore create one CSV format for my project and convert the data to that format before analysing it.
-
-* Another risk is getting enough match data. I can use public match reports as examples and create small sample datasets for testing. I will not use personal or private data.
-
-* The project could also become too large because professional volleyball statistics contain much more information than I need. I will start with serves, receptions, attacks, blocks, points and errors and add more statistics only if the basic version is working.
-
-* A technical risk is the possible CEV importer. The website structure could change or the data might not be easy to extract automatically. For this reason, importing CEV reports is optional and the main application will work with CSV files without an internet connection.
-
-* The main goal is to make something I could actually use after a volleyball match: give it the match statistics and get a clear overview of how the team and individual players performed.
-
-
-
+The [planning log](PLANNING_LOG.md) records project decisions, and [OpenSpec](openspec/changes/one-match-csv-report/proposal.md) contains the MVP requirements and implementation plan.

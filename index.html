@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Volleyball Match Report</title>
+    <link rel="stylesheet" href="src/styles.css">
+    <script src="src/core.js" defer></script>
+    <script src="src/app.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="site-header">
+        <div class="brand-mark" aria-hidden="true">V</div>
+        <div>
+          <p class="eyebrow">VOLLEYBALL STATISTICS TRACKER</p>
+          <h1>Match report</h1>
+          <p class="intro">Load one match CSV to see the score and core player statistics.</p>
+        </div>
+      </header>
+
+      <section class="upload-card" aria-labelledby="upload-heading">
+        <div>
+          <h2 id="upload-heading">Load a match</h2>
+          <p>Choose a CSV in the <a href="README.md">documented format</a>. The file stays on your device.</p>
+        </div>
+        <div class="upload-actions">
+          <label class="file-button" for="csv-file">Choose CSV file</label>
+          <input id="csv-file" type="file" accept=".csv,text/csv" aria-describedby="file-status">
+          <span id="file-status" class="file-status">No file loaded</span>
+        </div>
+      </section>
+
+      <section id="errors" class="errors" role="alert" hidden></section>
+
+      <section id="empty-state" class="empty-state">
+        <div class="empty-icon" aria-hidden="true">↗</div>
+        <h2>Your match starts here</h2>
+        <p>Prepare one match row and player rows, or try the <a href="samples/cev-82293-selected-players.csv" download>sample CSV</a>.</p>
+      </section>
+
+      <div id="report" hidden>
+        <section class="score-card" aria-labelledby="score-heading">
+          <div class="score-header">
+            <p class="eyebrow">MATCH RESULT</p>
+            <h2 id="score-heading">Final score</h2>
+          </div>
+          <div class="score-line">
+            <div class="team-name" id="team-1-name"></div>
+            <div class="set-score"><span id="team-1-sets"></span><span class="score-dash">:</span><span id="team-2-sets"></span></div>
+            <div class="team-name team-name-right" id="team-2-name"></div>
+          </div>
+          <div id="sets" class="sets" aria-label="Set scores"></div>
+        </section>
+
+        <section class="section-block" aria-labelledby="teams-heading">
+          <div class="section-heading">
+            <div><p class="eyebrow">THE MATCH</p><h2 id="teams-heading">Team statistics</h2></div>
+            <p>Player totals from this CSV. Opponent errors can make set points higher.</p>
+          </div>
+          <div id="team-summary" class="team-grid"></div>
+        </section>
+
+        <section class="section-block" aria-labelledby="players-heading">
+          <div class="section-heading">
+            <div><p class="eyebrow">ON THE COURT</p><h2 id="players-heading">Players</h2></div>
+            <p>Select a player to inspect their match.</p>
+          </div>
+          <div class="player-layout">
+            <div id="player-list" class="player-list" aria-label="Players"></div>
+            <article id="player-detail" class="player-detail" aria-live="polite"></article>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
