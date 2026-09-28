@@ -5,6 +5,7 @@ const path = require('node:path');
 const core = require('../src/core.js');
 
 const sample = fs.readFileSync(path.join(__dirname, '..', 'samples', 'cev-82293-selected-players.csv'), 'utf8');
+const secondRealMatch = fs.readFileSync(path.join(__dirname, '..', 'samples', 'cev-82294-full-match.csv'), 'utf8');
 
 function editRows(change) {
   const records = core.parseCsv(sample);
@@ -111,4 +112,19 @@ test('CEV sample has the hand-checked player and partial-team results', () => {
   assert.equal(core.attackSuccess(tijana).toFixed(1), '52.4');
   assert.equal(core.attackEfficiency(tijana).toFixed(1), '46.0');
   assert.equal(core.receptionErrorRate(tijana), null);
+});
+
+test('CSV format survives a second complete real CEV match', () => {
+  const result = core.parseMatchCsv(secondRealMatch);
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.match.team1, 'Eczacibasi Dynavit ISTANBUL');
+  assert.equal(result.match.team2, 'Savino Del Bene SCANDICCI');
+  assert.deepEqual([result.match.score1, result.match.score2], [3, 2]);
+  assert.equal(result.match.sets.length, 5);
+  assert.equal(result.match.players.length, 28);
+
+  const antropova = result.match.players.find((player) => player.name === 'ANTROPOVA Ekaterina');
+  assert.equal(antropova.points, 34);
+  assert.equal(antropova.attack_attempts, 49);
+  assert.equal(antropova.attack_points, 28);
 });

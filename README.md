@@ -51,6 +51,8 @@ CEV's `-` and `.` placeholders become zero for applicable counts. Reception qual
 
 `samples/cev-82293-selected-players.csv` is a small fallback example based on [CEV match 82293](https://www-old.cev.eu/Competition-Area/MatchStatistics.aspx?ID=82293). It contains selected players from both teams, so its calculated team totals are **partial**, not official full-team totals.
 
+`samples/cev-82294-full-match.csv` is a second real conversion based on [CEV match 82294](https://www-old.cev.eu/Competition-Area/MatchStatistics.aspx?ID=82294). It contains Eczacibasi Istanbul versus Scandicci, all five sets, and all 28 listed players. This second conversion confirms that the same CSV layout handles different teams, names with accented characters, players with zero attempts, reception percentages, and another complete five-set report without adding columns or changing validation rules.
+
 Use UTF-8 CSV with one header row. Column order can vary, and extra columns are ignored. The file has exactly one `match` row and one or more `player` rows. Write `0` for a measured count of zero; an empty cell means the field does not apply to that row type. Do not add CEV team-total or set-summary rows as players.
 
 | Column | `match` row | `player` row |
@@ -85,6 +87,7 @@ The reference match gives results that can be checked by hand:
 - **Player calculation:** Tijana Bošković has 33 attack points, 2 attack errors, 2 blocked attacks, and 63 attempts. Her efficiency is `(33 - 2 - 2) / 63 = 0.4603`, displayed as **46.0%**.
 - **Live import:** match 82293 produces VakifBank Istanbul 3–2 Conegliano, all five set scores, and both 14-player rosters.
 - **CSV team calculation:** the selected VakifBank players total `34 + 31 = 65` player points. Their combined efficiency is `(64 - 9 - 4) / 123 = 0.4146`, displayed as **41.5%**.
+- **Second real conversion:** match 82294 loads as Eczacibasi Istanbul 3–2 Scandicci with five sets and 28 players; Ekaterina Antropova has 34 points and 28 successful attacks from 49 attempts.
 
 Automated tests check parsing, URL restrictions, changed markup, statistical validation, controlled retrieval, server behavior, and these known results.
 

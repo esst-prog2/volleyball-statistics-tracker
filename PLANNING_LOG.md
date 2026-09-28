@@ -36,3 +36,5 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-09-28 | Decision: Make direct CEV match URL importing the project's central technical challenge and keep CSV loading as a fallback and test format. | Decided by: user
 2026-09-28 | Decision: Name the OpenSpec change add-cev-url-import and implement it with Node.js built-in HTTP and fetch APIs on 127.0.0.1, default port 3000, with no new runtime dependency. | Decided by: assistant
 2026-09-28 | Decision: Restrict CEV retrieval to the exact HTTPS match-statistics host and path, reject redirects, and use a 10-second timeout, 2 MiB response limit, and 8 KiB request limit. | Decided by: assistant
+2026-09-28 | Decision: Validate the CSV format with a second real CEV match and install the planning-log instruction in AGENTS.md, referenced by CLAUDE.md. | Decided by: user
+2026-09-28 | Decision: Use CEV match 82294 as the second full-match CSV example and regression fixture because it provides another five-set match with 28 players and different teams. | Decided by: assistant

@@ -1,0 +1,30 @@
+row_type,team_1,team_2,set_1_team_1,set_1_team_2,set_2_team_1,set_2_team_2,set_3_team_1,set_3_team_2,set_4_team_1,set_4_team_2,set_5_team_1,set_5_team_2,team,player,points,serve_attempts,serve_errors,serve_aces,reception_attempts,reception_errors,attack_attempts,attack_errors,attack_blocked,attack_points,block_points,reception_positive_pct,reception_excellent_pct
+match,Eczacibasi Dynavit ISTANBUL,Savino Del Bene SCANDICCI,20,25,25,20,25,17,21,25,15,8,,,,,,,,,,,,,,,
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,ÖZEL Tuna Aybüke,0,0,0,0,0,0,0,0,0,0,0,,
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,AKOZ Simge Sebnem,0,0,0,0,15,1,0,0,0,0,0,47,27
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,STYSIAK Magdalena,30,14,5,2,0,0,40,3,2,24,4,,
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,ÖZDEMİR Dilay,0,4,0,0,0,0,0,0,0,0,0,,
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,JACK-KISAL Sinead,13,18,0,2,0,0,17,1,2,9,2,,
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,DIKEN Meliha,0,0,0,0,4,0,0,0,0,0,0,0,0
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,ERKEK Yaprak,7,15,1,0,17,2,18,2,1,7,0,41,24
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,SMREK Anna,2,0,0,0,0,0,4,0,0,2,0,,
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,ŞAHİN Elif,6,16,3,1,0,0,5,0,0,5,0,,
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,RETTKE Dana,5,23,0,1,4,0,10,0,0,4,0,75,25
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,AYGÜN Bengisu,0,0,0,0,0,0,0,0,0,0,0,,
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,MAGLIO Emily Susan Isobel,0,0,0,0,0,0,0,0,0,0,0,,
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,PLUMMER Kathryn,9,2,1,0,5,2,21,2,2,8,1,20,20
+player,,,,,,,,,,,,,Eczacibasi Dynavit ISTANBUL,KARAKURT Ebrar,18,14,1,0,45,2,24,2,2,14,4,47,24
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,TRABALLI Gaia,0,0,0,0,0,0,0,0,0,0,0,,
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,BECHIS Marta,0,0,0,0,0,0,0,0,0,0,0,,
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,SKINNER Avery,11,10,1,0,27,1,28,3,2,10,1,37,4
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,CASTILLO Brenda,0,0,0,0,17,1,0,0,0,0,0,41,18
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,RUDDINS Lindsey,0,0,0,0,0,0,1,0,0,0,0,,
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,FRANKLIN Sarah Christina,2,4,0,0,10,0,8,2,2,2,0,40,20
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,RIBECHI Manuela,0,0,0,0,0,0,0,0,0,0,0,,
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,BOSETTI Caterina Chiara,7,18,0,1,40,3,16,2,0,5,1,33,18
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,OGNJENOVIC Maja,4,15,0,1,0,0,2,0,0,0,3,,
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,MANCINI Giulia Maria,0,0,0,0,0,0,0,0,0,0,0,,
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,GRAZIANI Emma,0,1,1,0,0,0,0,0,0,0,0,,
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,NWAKALOR Linda Nkiruka,8,16,0,0,0,0,9,0,1,6,2,,
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,ANTROPOVA Ekaterina,34,19,3,4,0,0,49,2,6,28,2,,
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,WEITZEL Camilla,8,12,0,1,1,1,12,0,0,7,0,0,0
