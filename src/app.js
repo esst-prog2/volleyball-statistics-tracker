@@ -2,12 +2,18 @@
   "use strict";
 
   const core = globalThis.VBT;
+  const cevForm = document.getElementById("cev-form");
+  const cevUrl = document.getElementById("cev-url");
+  const cevSubmit = document.getElementById("cev-submit");
+  const importStatus = document.getElementById("import-status");
   const fileInput = document.getElementById("csv-file");
   const fileStatus = document.getElementById("file-status");
   const errors = document.getElementById("errors");
   const emptyState = document.getElementById("empty-state");
   const report = document.getElementById("report");
   let currentMatch = null;
+
+  if (location.protocol === "file:") document.getElementById("server-notice").hidden = false;
 
   function element(tag, className, content) {
     const node = document.createElement(tag);
@@ -47,6 +53,18 @@
       card.append(element("span", "set-label", `SET ${set.number}`));
       card.append(element("strong", "set-points", `${set.team1} : ${set.team2}`));
       container.append(card);
+    }
+    const source = document.getElementById("source");
+    source.replaceChildren();
+    if (match.source?.type === "cev") {
+      source.append("Imported from ");
+      const link = element("a", "", "CEV match statistics");
+      link.href = match.source.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      source.append(link);
+    } else if (match.source?.type === "csv") {
+      source.textContent = `Loaded from CSV: ${match.source.name}`;
     }
   }
 
@@ -136,6 +154,45 @@
     emptyState.hidden = false;
   }
 
+  function showMatch(match) {
+    currentMatch = match;
+    renderScore(currentMatch);
+    renderTeams(currentMatch);
+    renderPlayer(currentMatch, currentMatch.players[0]);
+    emptyState.hidden = true;
+    report.hidden = false;
+  }
+
+  cevForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    errors.hidden = true;
+    clearReport();
+    if (location.protocol === "file:") {
+      renderErrors([{ row: null, field: "CEV URL", message: "Run npm start and open the local server address before importing a CEV link." }]);
+      return;
+    }
+    cevSubmit.disabled = true;
+    cevSubmit.textContent = "Importing…";
+    importStatus.textContent = "Retrieving and checking the CEV report…";
+    try {
+      const response = await fetch("/api/cev-import", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ url: cevUrl.value }),
+      });
+      const body = await response.json();
+      if (!response.ok) throw new Error(body.error?.message || "Could not import the CEV page.");
+      showMatch(body.match);
+      importStatus.textContent = `Imported ${body.match.players.length} players.`;
+    } catch (error) {
+      importStatus.textContent = "";
+      renderErrors([{ row: null, field: "CEV URL", message: error.message || "Could not import the CEV page." }]);
+    } finally {
+      cevSubmit.disabled = false;
+      cevSubmit.textContent = "Import match";
+    }
+  });
+
   fileInput.addEventListener("change", async () => {
     const file = fileInput.files?.[0];
     if (!file) return;
@@ -149,12 +206,8 @@
         renderErrors(result.errors);
         return;
       }
-      currentMatch = result.match;
-      renderScore(currentMatch);
-      renderTeams(currentMatch);
-      renderPlayer(currentMatch, currentMatch.players[0]);
-      emptyState.hidden = true;
-      report.hidden = false;
+      result.match.source = { type: "csv", name: file.name };
+      showMatch(result.match);
     } catch (error) {
       renderErrors([{ row: null, field: "CSV", message: error.message || "Could not read the file" }]);
     }

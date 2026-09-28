@@ -22,12 +22,25 @@ h2 { margin-bottom: 7px; font-size: 23px; letter-spacing: -.025em; }
 .intro, .upload-card p, .section-heading p, .empty-state p { color: #5d6b80; line-height: 1.5; }
 .intro { margin: 0; }
 
-.upload-card, .score-card, .team-card, .player-list, .player-detail, .empty-state { background: white; border: 1px solid #e0e7f0; border-radius: 20px; box-shadow: 0 5px 20px #223b680a; }
-.upload-card { display: flex; justify-content: space-between; align-items: center; gap: 28px; padding: 23px 28px; }
-.upload-card p { margin: 0; }
+.import-card, .score-card, .team-card, .player-list, .player-detail, .empty-state, .csv-fallback { background: white; border: 1px solid #e0e7f0; border-radius: 20px; box-shadow: 0 5px 20px #223b680a; }
+.import-card { padding: 27px 28px; }
+.import-card p { margin-bottom: 20px; color: #5d6b80; line-height: 1.5; }
+.url-form label { display: block; margin-bottom: 8px; color: #334763; font-size: 13px; font-weight: 750; }
+.url-actions { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+.url-actions input { width: 100%; min-width: 0; padding: 13px 14px; border: 1px solid #bdc9db; border-radius: 10px; color: #17263d; }
+.url-actions input:focus { outline: 2px solid #2457c5; outline-offset: 1px; border-color: transparent; }
+.url-actions button { border: 0; border-radius: 10px; padding: 0 20px; background: #2457c5; color: white; font-weight: 750; cursor: pointer; }
+.url-actions button:hover { background: #1746ad; }
+.url-actions button:disabled { opacity: .65; cursor: wait; }
+.server-notice { margin-top: 14px; padding: 14px 18px; border: 1px solid #edca87; border-radius: 12px; background: #fff9e9; color: #755414; line-height: 1.5; }
+.server-notice code { padding: 2px 5px; border-radius: 4px; background: #fff1c8; }
+.csv-fallback { margin-top: 14px; padding: 18px 24px; }
+.csv-fallback summary { cursor: pointer; font-weight: 750; }
+.csv-fallback p { margin: 14px 0; color: #5d6b80; }
 .upload-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
 .file-button { display: inline-block; padding: 12px 19px; border-radius: 10px; background: #2457c5; color: white; font-weight: 700; cursor: pointer; white-space: nowrap; }
 .file-button:hover, .file-button:focus-within { background: #1746ad; }
+.secondary-button { background: #51637e; }
 #csv-file { position: absolute; width: 1px; height: 1px; opacity: 0; }
 #csv-file:focus-visible + .file-status { outline: 2px solid #2457c5; outline-offset: 4px; }
 .file-status { color: #5d6b80; font-size: 13px; overflow-wrap: anywhere; }
@@ -50,6 +63,7 @@ h2 { margin-bottom: 7px; font-size: 23px; letter-spacing: -.025em; }
 .set-card { display: flex; flex-direction: column; gap: 5px; min-width: 92px; padding: 10px 15px; border-radius: 10px; background: #f2f5fa; }
 .set-label { color: #64738a; font-size: 10px; font-weight: 800; letter-spacing: .1em; }
 .set-points { font-size: 17px; }
+.source { margin: 18px 0 0; color: #64738a; font-size: 12px; }
 
 .section-block { margin-top: 42px; }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 15px; }
@@ -79,7 +93,9 @@ h2 { margin-bottom: 7px; font-size: 23px; letter-spacing: -.025em; }
 
 @media (max-width: 740px) {
   .shell { width: min(100% - 24px, 540px); padding-top: 24px; }
-  .upload-card, .section-heading { display: block; }
+  .section-heading { display: block; }
+  .url-actions { grid-template-columns: 1fr; }
+  .url-actions button { padding: 13px 18px; }
   .upload-actions { margin-top: 18px; }
   .score-card { padding: 23px 20px; }
   .score-line { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 8px; }

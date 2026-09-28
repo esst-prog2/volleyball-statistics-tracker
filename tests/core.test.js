@@ -99,13 +99,14 @@ test('reception percentages and count constraints are validated', () => {
   hasError(core.parseMatchCsv(attacks), 'attack_attempts');
 });
 
-test('team totals use counts and zero-attempt rates are unavailable', () => {
+test('CEV sample has the hand-checked player and partial-team results', () => {
   const match = core.parseMatchCsv(sample).match;
   const vakif = core.teamTotals(match, match.team1);
   assert.equal(vakif.points, 65);
   assert.equal(vakif.attack_attempts, 123);
   assert.equal(vakif.attack_points, 64);
   assert.equal(core.attackSuccess(vakif).toFixed(1), '52.0');
+  assert.equal(core.attackEfficiency(vakif).toFixed(1), '41.5');
   const tijana = match.players.find((player) => player.name.includes('BOŠKOVIĆ'));
   assert.equal(core.attackSuccess(tijana).toFixed(1), '52.4');
   assert.equal(core.attackEfficiency(tijana).toFixed(1), '46.0');

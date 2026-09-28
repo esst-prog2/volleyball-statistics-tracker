@@ -15,28 +15,46 @@
         <div>
           <p class="eyebrow">VOLLEYBALL STATISTICS TRACKER</p>
           <h1>Match report</h1>
-          <p class="intro">Load one match CSV to see the score and core player statistics.</p>
+          <p class="intro">Paste a CEV match link to turn a real report into clear team and player statistics.</p>
         </div>
       </header>
 
-      <section class="upload-card" aria-labelledby="upload-heading">
+      <section class="import-card" aria-labelledby="import-heading">
         <div>
-          <h2 id="upload-heading">Load a match</h2>
-          <p>Choose a CSV in the <a href="README.md">documented format</a>. The file stays on your device.</p>
+          <p class="eyebrow">PRIMARY IMPORT</p>
+          <h2 id="import-heading">Import from CEV</h2>
+          <p>Paste the full Match Statistics page URL. The importer reads the score and both player tables.</p>
         </div>
+        <form id="cev-form" class="url-form">
+          <label for="cev-url">CEV match URL</label>
+          <div class="url-actions">
+            <input id="cev-url" name="cev-url" type="url" required placeholder="https://www-old.cev.eu/Competition-Area/MatchStatistics.aspx?ID=82293" autocomplete="url">
+            <button id="cev-submit" type="submit">Import match</button>
+          </div>
+          <span id="import-status" class="file-status" aria-live="polite"></span>
+        </form>
+      </section>
+
+      <aside id="server-notice" class="server-notice" hidden>
+        CEV importing needs the local server. In the repository terminal, run <code>npm start</code>, then open the address it prints. CSV fallback still works here.
+      </aside>
+
+      <details class="csv-fallback">
+        <summary>Use a CSV instead</summary>
+        <p>Choose a CSV in the <a href="README.md">documented format</a>. The file stays on your device.</p>
         <div class="upload-actions">
-          <label class="file-button" for="csv-file">Choose CSV file</label>
+          <label class="file-button secondary-button" for="csv-file">Choose CSV file</label>
           <input id="csv-file" type="file" accept=".csv,text/csv" aria-describedby="file-status">
           <span id="file-status" class="file-status">No file loaded</span>
         </div>
-      </section>
+      </details>
 
       <section id="errors" class="errors" role="alert" hidden></section>
 
       <section id="empty-state" class="empty-state">
         <div class="empty-icon" aria-hidden="true">↗</div>
         <h2>Your match starts here</h2>
-        <p>Prepare one match row and player rows, or try the <a href="samples/cev-82293-selected-players.csv" download>sample CSV</a>.</p>
+        <p>Try the reference CEV URL above, or use the <a href="samples/cev-82293-selected-players.csv" download>sample CSV</a>.</p>
       </section>
 
       <div id="report" hidden>
@@ -51,12 +69,13 @@
             <div class="team-name team-name-right" id="team-2-name"></div>
           </div>
           <div id="sets" class="sets" aria-label="Set scores"></div>
+          <p id="source" class="source"></p>
         </section>
 
         <section class="section-block" aria-labelledby="teams-heading">
           <div class="section-heading">
             <div><p class="eyebrow">THE MATCH</p><h2 id="teams-heading">Team statistics</h2></div>
-            <p>Player totals from this CSV. Opponent errors can make set points higher.</p>
+            <p>Imported player totals. Opponent errors can make set points higher.</p>
           </div>
           <div id="team-summary" class="team-grid"></div>
         </section>

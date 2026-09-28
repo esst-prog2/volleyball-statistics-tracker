@@ -2,8 +2,9 @@
   "name": "volleyball-statistics-tracker",
   "private": true,
   "version": "0.1.0",
-  "description": "Offline one-match volleyball CSV report",
+  "description": "Import and analyze one CEV volleyball match report",
   "scripts": {
+    "start": "node server.js",
     "test": "node --test"
   }
 }

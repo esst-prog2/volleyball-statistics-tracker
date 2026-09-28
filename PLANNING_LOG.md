@@ -32,3 +32,7 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-09-22 | Decision: Use the exact CSV field names and validation rules specified in the one-match-csv-report OpenSpec change. | Decided by: assistant
 2026-09-22 | Decision: Calculate attack success as attack points divided by attempts, attack efficiency as (attack points minus attack errors minus attacks blocked) divided by attempts, and reception error rate from errors divided by attempts. | Decided by: assistant
 2026-09-22 | Decision: Apply the approved OpenSpec MVP change, then commit and push the completed work. | Decided by: user
+2026-09-28 | Decision: Use the real CEV sample to state and test concrete expected results: Tijana Bošković's attack efficiency is 46.0%, selected VakifBank player points total 65, and their combined attack efficiency is 41.5%. | Decided by: user
+2026-09-28 | Decision: Make direct CEV match URL importing the project's central technical challenge and keep CSV loading as a fallback and test format. | Decided by: user
+2026-09-28 | Decision: Name the OpenSpec change add-cev-url-import and implement it with Node.js built-in HTTP and fetch APIs on 127.0.0.1, default port 3000, with no new runtime dependency. | Decided by: assistant
+2026-09-28 | Decision: Restrict CEV retrieval to the exact HTTPS match-statistics host and path, reject redirects, and use a 10-second timeout, 2 MiB response limit, and 8 KiB request limit. | Decided by: assistant
