@@ -47,3 +47,4 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-10-03 | Decision: Every measured spike must commit its reproduction means: the script and input data, or a dated raw response or quotation when an external source supplies the answer. | Decided by: user
 2026-10-03 | Decision: Preserve the complete CEV match 82294 HTML response retrieved on 2026-10-03 as the spike input, record its SHA-256 hash, and make the comparison script use it by default. | Decided by: assistant
 2026-10-03 | Decision: Mark committed spike HTML inputs as non-text in .gitattributes so Git preserves the raw response bytes without line-ending normalization. | Decided by: assistant
+2026-10-03 | Decision: Merge pull request 4 with a merge commit, keep the hw4-spike branch afterward, and use three short paragraphs in the pull request description for the question, method, and result. | Decided by: user
