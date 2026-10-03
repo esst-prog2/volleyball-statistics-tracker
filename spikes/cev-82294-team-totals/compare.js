@@ -4,11 +4,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const core = require("../../src/core.js");
 
-const htmlPath = process.argv[2];
-if (!htmlPath) {
-  console.error("Usage: node compare.js /path/to/cev-82294.html");
-  process.exit(1);
-}
+const htmlPath = process.argv[2] || path.join(__dirname, "input/cev-82294.html");
 
 const html = fs.readFileSync(htmlPath, "utf8");
 const csv = fs.readFileSync(path.join(__dirname, "../../samples/cev-82294-full-match.csv"), "utf8");
