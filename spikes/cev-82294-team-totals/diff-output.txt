@@ -1,0 +1,41 @@
+CEV match 82294 TOTAL-row comparison
+======================================
+
+Result: 22 of 24 comparable cells match exactly.
+Largest discrepancy: Eczacibasi Dynavit ISTANBUL attack_success_pct; computed 52.5, CEV 53, absolute difference 0.5 percentage points.
+
+Comparison uses the application's one-decimal display value for attack success and CEV's printed integer percentage.
+Excluded from N because the application does not compute them: break_points, win_loss, reception_positive_pct, reception_excellent_pct (4 per team, 8 cells total).
+Application-only rates excluded because CEV does not print them in this row: attack efficiency, reception error rate.
+
+team | field | computed | CEV | difference | result
+--- | --- | ---: | ---: | ---: | ---
+Eczacibasi Dynavit ISTANBUL | points | 90 | 90 | 0 | MATCH
+Eczacibasi Dynavit ISTANBUL | serve_attempts | 106 | 106 | 0 | MATCH
+Eczacibasi Dynavit ISTANBUL | serve_errors | 11 | 11 | 0 | MATCH
+Eczacibasi Dynavit ISTANBUL | serve_aces | 6 | 6 | 0 | MATCH
+Eczacibasi Dynavit ISTANBUL | reception_attempts | 90 | 90 | 0 | MATCH
+Eczacibasi Dynavit ISTANBUL | reception_errors | 7 | 7 | 0 | MATCH
+Eczacibasi Dynavit ISTANBUL | attack_attempts | 139 | 139 | 0 | MATCH
+Eczacibasi Dynavit ISTANBUL | attack_errors | 10 | 10 | 0 | MATCH
+Eczacibasi Dynavit ISTANBUL | attack_blocked | 9 | 9 | 0 | MATCH
+Eczacibasi Dynavit ISTANBUL | attack_points | 73 | 73 | 0 | MATCH
+Eczacibasi Dynavit ISTANBUL | attack_success_pct | 52.5 | 53 | -0.5 | DIFF
+Eczacibasi Dynavit ISTANBUL | block_points | 11 | 11 | 0 | MATCH
+Savino Del Bene SCANDICCI | points | 74 | 74 | 0 | MATCH
+Savino Del Bene SCANDICCI | serve_attempts | 95 | 95 | 0 | MATCH
+Savino Del Bene SCANDICCI | serve_errors | 5 | 5 | 0 | MATCH
+Savino Del Bene SCANDICCI | serve_aces | 7 | 7 | 0 | MATCH
+Savino Del Bene SCANDICCI | reception_attempts | 95 | 95 | 0 | MATCH
+Savino Del Bene SCANDICCI | reception_errors | 6 | 6 | 0 | MATCH
+Savino Del Bene SCANDICCI | attack_attempts | 125 | 125 | 0 | MATCH
+Savino Del Bene SCANDICCI | attack_errors | 9 | 9 | 0 | MATCH
+Savino Del Bene SCANDICCI | attack_blocked | 11 | 11 | 0 | MATCH
+Savino Del Bene SCANDICCI | attack_points | 58 | 58 | 0 | MATCH
+Savino Del Bene SCANDICCI | attack_success_pct | 46.4 | 46 | 0.4 | DIFF
+Savino Del Bene SCANDICCI | block_points | 9 | 9 | 0 | MATCH
+
+DIKEN Meliha check
+------------------
+CSV/imported values: 4 receptions, 0 errors, 0% positive, 0% excellent.
+The CEV player row explicitly prints 4, '.', 0%, 0% respectively. The parser converts only the '.' error placeholder to count 0; both reception percentages are explicit CEV zeroes.
