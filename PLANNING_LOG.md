@@ -38,3 +38,6 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-09-28 | Decision: Restrict CEV retrieval to the exact HTTPS match-statistics host and path, reject redirects, and use a 10-second timeout, 2 MiB response limit, and 8 KiB request limit. | Decided by: assistant
 2026-09-28 | Decision: Validate the CSV format with a second real CEV match and install the planning-log instruction in AGENTS.md, referenced by CLAUDE.md. | Decided by: user
 2026-09-28 | Decision: Use CEV match 82294 as the second full-match CSV example and regression fixture because it provides another five-set match with 28 players and different teams. | Decided by: assistant
+2026-10-03 | Decision: Perform the homework spike on a new branch named hw4-spike, commit incremental evidence, push the branch, and open a pull request. | Decided by: user
+2026-10-03 | Decision: Spike question: do the team totals and rates computed by this application for CEV match 82294 equal CEV's printed TOTAL rows cell by cell? | Decided by: user
+2026-10-03 | Decision: The spike is answered by the number of matching cells out of all compared cells and the largest absolute discrepancy, with the parsed TOTAL rows and complete diff committed as evidence. | Decided by: user
