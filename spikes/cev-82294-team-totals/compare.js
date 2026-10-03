@@ -85,4 +85,4 @@ const lines = [
   "",
 ];
 fs.writeFileSync(path.join(__dirname, "diff-output.txt"), lines.join("\n"));
-console.log(lines.join("\n"));
+process.stdout.write(lines.join("\n"));
