@@ -1,0 +1,38 @@
+{
+  "Eczacibasi Dynavit ISTANBUL": {
+    "points": 90,
+    "break_points": 29,
+    "win_loss": 62,
+    "serve_attempts": 106,
+    "serve_errors": 11,
+    "serve_aces": 6,
+    "reception_attempts": 90,
+    "reception_errors": 7,
+    "reception_positive_pct": 43,
+    "reception_excellent_pct": 23,
+    "attack_attempts": 139,
+    "attack_errors": 10,
+    "attack_blocked": 9,
+    "attack_points": 73,
+    "attack_success_pct": 53,
+    "block_points": 11
+  },
+  "Savino Del Bene SCANDICCI": {
+    "points": 74,
+    "break_points": 22,
+    "win_loss": 54,
+    "serve_attempts": 95,
+    "serve_errors": 5,
+    "serve_aces": 7,
+    "reception_attempts": 95,
+    "reception_errors": 6,
+    "reception_positive_pct": 36,
+    "reception_excellent_pct": 14,
+    "attack_attempts": 125,
+    "attack_errors": 9,
+    "attack_blocked": 11,
+    "attack_points": 58,
+    "attack_success_pct": 46,
+    "block_points": 9
+  }
+}

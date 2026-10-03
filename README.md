@@ -91,6 +91,12 @@ The reference match gives results that can be checked by hand:
 
 Automated tests check parsing, URL restrictions, changed markup, statistical validation, controlled retrieval, server behavior, and these known results.
 
+### CEV TOTAL-row verification
+
+A focused check against match 82294 compared every team TOTAL-row cell that has an equivalent in the application. **22 of 24 cells matched exactly**, including every count. The two differences were attack-success percentages: the application displays `73 / 139` as **52.5%** while CEV prints **53%**, and `58 / 125` as **46.4%** while CEV prints **46%**. The largest discrepancy was therefore **0.5 percentage points**, caused by CEV using whole percentages while the application keeps one decimal place. The application retains one decimal place because it shows the count-derived value more precisely.
+
+The check also confirmed that CEV explicitly reports DIKEN Meliha's four receptions as 0% positive and 0% excellent. Her reception-error cell is `.`, which is the only value normalized to zero. The committed [raw input and source record](spikes/cev-82294-team-totals/SOURCE.md), [parsed TOTAL rows](spikes/cev-82294-team-totals/parsed-total-rows.json), and [cell-by-cell diff](spikes/cev-82294-team-totals/diff-output.txt) make the result reproducible without relying on the live page.
+
 ## Scope
 
 The first complete version imports one public CEV match URL or one fallback CSV and displays one match at a time. It does not perform live scoring, video analysis, player tracking, machine-learning prediction, accounts, sharing, bulk scraping, or professional-system replacement. Comparing matches and adding defensible position and level benchmarks remain possible later extensions.
