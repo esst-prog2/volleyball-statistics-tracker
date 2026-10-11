@@ -51,3 +51,25 @@ test('CEV parser rejects missing structure and invalid statistics', () => {
   assert.throws(() => parseCevHtml(fixture.replace('>34<', '>35<'), sourceUrl), /failed validation/);
   assert.throws(() => parseCevHtml(fixture.replace('id="L_Set3"', 'id="changed"'), sourceUrl), /nonconsecutive set scores/);
 });
+test('HW5: Gabi scored 14 attack points in CEV match 82295', () => {
+  const gabiSourceUrl =
+    'https://www-old.cev.eu/Competition-Area/MatchStatistics.aspx?ID=82295';
+
+  const gabiHtml = fs.readFileSync(
+    path.join(__dirname, '..', 'samples', 'cev_match_82295.html'),
+    'utf8'
+  );
+
+  const match = parseCevHtml(gabiHtml, gabiSourceUrl);
+
+  const gabi = match.players.find(
+    (player) => player.name === 'BRAGA GUIMARAES Gabriela'
+  );
+
+  assert.ok(gabi, 'Gabi should be found in the match');
+
+  // Expected values checked manually from the official CEV report
+  assert.equal(gabi.attack_points, 14);
+  assert.equal(gabi.attack_attempts, 26);
+  assert.equal(gabi.points, 17);
+});

@@ -48,3 +48,15 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-10-03 | Decision: Preserve the complete CEV match 82294 HTML response retrieved on 2026-10-03 as the spike input, record its SHA-256 hash, and make the comparison script use it by default. | Decided by: assistant
 2026-10-03 | Decision: Mark committed spike HTML inputs as non-text in .gitattributes so Git preserves the raw response bytes without line-ending normalization. | Decided by: assistant
 2026-10-03 | Decision: Merge pull request 4 with a merge commit, keep the hw4-spike branch afterward, and use three short paragraphs in the pull request description for the question, method, and result. | Decided by: user
+2026-10-11 | Decision: Perform the usability homework on a new branch named hw5-usable, created before any other work. | Decided by: user
+2026-10-11 | Decision: A test would go red if my Volleyball Statistics Tracker failed to read a player's attack points correctly from an official CEV match report. I chose to test Gabi's statistics from match 82295. | Decided by: user
+
+2026-10-11 | Expected value: I checked the official CEV match report before running my test. Gabi had 14 attack points from 26 attempts and 17 total points. These numbers came from the original report, not from my program. | Decided by: user
+
+2026-10-11 | Test: Added a test to tests/cev.test.js using samples/cev_match_82295.html. The test checks Gabi's attack points, attack attempts, and total points. | Implemented with: assistant
+
+2026-10-11 | RED: Temporarily changed cells[21] to cells[22] in src/cev.js. Ran node --test tests/cev.test.js. Result: 3 passed, 3 failed, including the Gabi test. The parser reported that it could not read her attack points.
+
+2026-10-11 | GREEN: Restored cells[21] and ran npm test. Result: 21 passed, 0 failed.
+
+2026-10-11 | Real use: Before checking my tracker, I expected Gabi to have 14 attack points, 26 attack attempts, and 17 total points. After opening match 82295 in the application, I got 14, 26, and 17. All values matched my expectations.
