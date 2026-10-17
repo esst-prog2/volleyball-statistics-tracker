@@ -56,7 +56,7 @@ In `src/app.js`, however, `currentMatch` was unnecessary mutable state. It was a
 
 **Result:** Simplified report rendering by removing redundant state. No unrequested application feature was found.
 
-## Review 3: Duplicate Implementations and Dead Code
+## Review 3: Duplicate Implementations, Dead Code, and Dependencies
 
 **Focus:** Examine the whole repository for unused functions, duplicated logic, obsolete files, and unnecessary dependencies.
 
@@ -64,7 +64,7 @@ In `src/app.js`, however, `currentMatch` was unnecessary mutable state. It was a
 
 I checked function definitions and references in the application, server, tests, and comparison spike; the HTML and dynamically generated CSS classes; package configuration; samples and fixtures; documentation; and current and archived OpenSpec files.
 
-- No unused JavaScript function was identified. Parsing helpers, rate calculations, rendering helpers, and server helpers all have callers.
+- No unused JavaScript function, variable, or import requiring removal was identified. Parsing helpers, rate calculations, rendering helpers, and server helpers all have callers; imported modules and local variables support those paths.
 - `.upload-card p` in `src/styles.css` was a dead selector: neither `index.html` nor the JavaScript rendering code creates that class.
 - CSV and CEV imports share statistical validation and the report renderer. The repeated team and player statistic sections have different fields and presentation, so a new abstraction was not justified for this review.
 - The test CSV-escaping helper and the spike's small HTML parser resemble production code, but serve test-input construction and independent TOTAL-row comparison respectively. They are not duplicate application features.
@@ -73,12 +73,14 @@ I checked function definitions and references in the application, server, tests,
 
 ### What I changed
 
-- Removed the unused `.upload-card p` selector from its shared CSS rule, preserving the declarations for the remaining selectors.
+- Removed the unused `.upload-card p` selector from its shared CSS rule, preserving the declarations for the remaining selectors. This cleanup was committed in `578a37f`.
+- Rechecked the findings against the active OpenSpec specifications and Session 6 guidance. No further code changes were justified. Updated this section to use the requested title and record the complete verification.
 
 ### Verification
 
 - Confirmed there are no `upload-card` references in the application HTML or JavaScript.
 - All 22 project tests passed, with 0 failures.
+- `node --check` passed for all 8 tracked JavaScript files (application, server, tests, and comparison spike).
 - `git diff --check` passed.
 - Browser visual interaction was not tested; the removed selector had no matching application element.
 
