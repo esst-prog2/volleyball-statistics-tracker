@@ -73,3 +73,20 @@ test('HW5: Gabi scored 14 attack points in CEV match 82295', () => {
   assert.equal(gabi.attack_attempts, 26);
   assert.equal(gabi.points, 17);
 });
+test('CEV parser rejects a player row with a changed name identifier', () => {
+  const changedHtml = fixture.replace(
+    'GV_elenco_casa_L_Nome_10',
+    'GV_elenco_casa_L_Changed_10'
+  );
+
+  assert.notEqual(
+    changedHtml,
+    fixture,
+    'Fixture must contain the player identifier'
+  );
+
+  assert.throws(
+    () => parseCevHtml(changedHtml, sourceUrl),
+    /format may have changed|player row|format changed/i
+  );
+});
