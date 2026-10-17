@@ -90,3 +90,28 @@ test('CEV parser rejects a player row with a changed name identifier', () => {
     /format may have changed|player row|format changed/i
   );
 });
+test('CEV parser rejects blank counts instead of silently treating them as zero', () => {
+  const changedHtml = fixture.replace(
+    /(<span id="GV_elenco_casa_L_RecTot_10">)-(<\/span>)/,
+    '$1   $2'
+  );
+  assert.notEqual(changedHtml, fixture, 'Fixture must contain the reception placeholder');
+  assert.throws(
+    () => parseCevHtml(changedHtml, sourceUrl),
+    (error) => error instanceof CevImportError && error.code === 'format_changed' &&
+      /reception attempts.*BOŠKOVIĆ Tijana/.test(error.message)
+  );
+});
+
+test('CEV count placeholders remain zero and no-attempt rates remain unavailable', () => {
+  for (const placeholder of ['.', '-']) {
+    const html = fixture.replace(
+      /(<span id="GV_elenco_casa_L_RecTot_10">)-(<\/span>)/,
+      `$1${placeholder}$2`
+    );
+    const player = parseCevHtml(html, sourceUrl).players.find((item) => item.name === 'BOŠKOVIĆ Tijana');
+    assert.equal(player.reception_attempts, 0);
+    assert.equal(player.reception_positive_pct, null);
+    assert.equal(core.receptionErrorRate(player), null);
+  }
+});

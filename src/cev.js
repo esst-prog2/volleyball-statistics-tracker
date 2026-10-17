@@ -79,7 +79,7 @@ function tableHtmlById(html, id) {
 
 function countValue(value, field, player) {
   const normalized = value.trim();
-  if (normalized === "" || normalized === "." || normalized === "-") return 0;
+  if (normalized === "." || normalized === "-") return 0;
   if (!/^(0|[1-9]\d*)$/.test(normalized)) {
     throw new CevImportError("format_changed", `Could not read ${field} for ${player}; the CEV page format may have changed.`);
   }

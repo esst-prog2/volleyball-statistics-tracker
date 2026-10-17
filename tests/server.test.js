@@ -75,3 +75,27 @@ test('endpoint limits request bodies and reports changed page structure', async 
     assert.equal(huge.status, 413);
   });
 });
+
+test('endpoint reports missing CEV counts and hides upstream exception details', async () => {
+  const blankCount = fixture.replace(
+    /(<span id="GV_elenco_casa_L_RecTot_10">)-(<\/span>)/,
+    '$1$2'
+  );
+  assert.notEqual(blankCount, fixture);
+  for (const [fetchImpl, expectedCode, expectedMessage] of [
+    [async () => new Response(blankCount), 'format_changed', /reception attempts/],
+    [async () => { throw new Error('private upstream implementation details'); }, 'cev_unavailable', /Could not retrieve/],
+  ]) {
+    await withServer({ fetchImpl }, async (base) => {
+      const response = await fetch(`${base}/api/cev-import`, {
+        method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ url: sourceUrl }),
+      });
+      assert.equal(response.status, 422);
+      const body = await response.json();
+      assert.equal(body.error.code, expectedCode);
+      assert.match(body.error.message, expectedMessage);
+      assert.equal(body.match, undefined);
+      assert.doesNotMatch(JSON.stringify(body), /private upstream|stack/);
+    });
+  }
+});

@@ -85,3 +85,33 @@ I checked function definitions and references in the application, server, tests,
 - Browser visual interaction was not tested; the removed selector had no matching application element.
 
 **Result:** Removed dead styling. No unused JavaScript functions, unnecessary dependencies, obsolete tracked files, or duplicate application implementations requiring removal were identified.
+
+## Review 4: Error Handling and Quiet Defaults
+
+**Focus:** Review silent failures, defaults that hide missing data, catch boundaries, CEV validation, failed-import report clearing, and public server error messages against Session 6 guidance and the active OpenSpec specifications.
+
+### What I inspected and found
+
+I inspected the CSV parser and statistical validation in `src/core.js`, CEV parsing in `src/cev.js`, retrieval and HTTP error handling in `server.js`, both import handlers in `src/app.js`, the HTML report container, tests and fixtures, saved real CEV inputs, the comparison spike, and the active import/report specifications.
+
+- `countValue` accepted an empty or whitespace-only CEV count cell as zero. This could turn missing reception attempts into a plausible zero and pass shared statistical validation. The active specification explicitly identifies `.` and `-` as legitimate placeholders. Neither saved real-match page (82294 or 82295) contains blank player count cells in the imported fields.
+- No empty catch block was found. CSV parsing failures become validation errors; URL/JSON decoding failures become explicit rejection; unsafe static paths return 404. The comparison spike throws on missing tables, rows, and invalid CSV instead of continuing with an empty result.
+- Browser import catches display errors, and the retrieval catch preserves known `CevImportError` values and distinguishes timeout from retrieval failure. The HTTP boundary returns known import errors and a generic message for unexpected exceptions rather than exposing stacks. The retrieval catch is broad and also covers parsing, but it still rejects the import; no catch-boundary refactor was needed for this focused fix.
+- Both import handlers call `clearReport` before awaiting retrieval or file reading. Invalid CSV results and failed CEV requests do not call `showMatch`. This confirms the ordinary sequential failed-import path by inspection; concurrent imports and browser interaction were not exercised in this review.
+- Blank later set scores represent unplayed sets and remain subject to match validation. Zero-attempt rates remain unavailable. Empty reception-quality values when attempts are zero remain unavailable. These defaults have legitimate meanings and were preserved.
+
+### What I changed
+
+- Restricted CEV count normalization to explicit `.` and `-` placeholders. Blank count cells now raise a field- and player-specific `format_changed` error.
+- Added a regression test for a blank reception-attempt cell that previously passed as zero, plus coverage preserving both legitimate count placeholders and unavailable no-attempt rates.
+- Added endpoint coverage confirming missing counts return an import error without a partial match, and upstream exceptions do not expose their private messages or stacks.
+
+### Verification
+
+- Before the fix, the blank-count regression failed with “Missing expected exception,” demonstrating the quiet default.
+- After the fix, `npm test` passed all 25 tests, with 0 failures, including the existing saved real-match test.
+- `node --check` passed for all 8 tracked JavaScript files; the endpoint test file was checked again after adding its new test.
+- `git diff --check` passed.
+- Browser interaction and live CEV retrieval were not tested; automated checks use saved inputs and injected retrieval responses.
+
+**Result:** Missing CEV counts are rejected rather than silently replaced with zero, while legitimate placeholders and required import behavior are preserved.
