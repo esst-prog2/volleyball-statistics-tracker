@@ -115,3 +115,35 @@ I inspected the CSV parser and statistical validation in `src/core.js`, CEV pars
 - Browser interaction and live CEV retrieval were not tested; automated checks use saved inputs and injected retrieval responses.
 
 **Result:** Missing CEV counts are rejected rather than silently replaced with zero, while legitimate placeholders and required import behavior are preserved.
+
+## Review 5: Repository Hygiene and Test Reliability
+
+**Focus:** Review tracked files, ignore rules, sensitive information, reproducible tests, regression coverage, and setup documentation against Session 6 guidance and the active OpenSpec specifications.
+
+### What I inspected and found
+
+I inspected the tracked-file inventory and sizes, filenames and contents for common credential patterns, ignore rules, package configuration, README instructions, application and server entry points, all tests, saved inputs, spike artifacts, and the active specifications.
+
+- No obvious private keys, access tokens, credentials, or local configuration files were found among currently tracked files. The credential-bearing URL in the URL-rejection test is synthetic test data. This was a focused working-tree review, not an exhaustive audit of every historical Git object.
+- The largest tracked files are the saved match 82294 HTML (155,329 bytes) and match 82295 HTML (126,398 bytes). They support reproducible comparison and regression checks. Spike outputs, fixtures, assignment logs, and archived specifications have documented purposes and were preserved. No unnecessary tracked temporary or generated artifact was identified.
+- `.DS_Store` was already ignored. `.Rhistory` was untracked but not ignored, creating a risk of accidentally committing local command history.
+- Tests load committed inputs and inject CEV responses rather than fetching changing live pages. HTTP integration tests use only a temporary localhost server. The timeout check uses an abort-aware mock, not an external service.
+- Existing tests cover import structure, statistical validation, known match values, URL restrictions, retrieval errors, and HTTP responses. Explicit regression coverage was missing for unclosed CSV quotes, unavailable attack rates with no attempts, and a simple hand-calculated team-rate example with strongly unequal attempt counts. Browser interaction remains outside the automated suite.
+- README run and test commands match `package.json`, but setup did not explicitly explain that no dependency installation is required or that tests work offline while needing local port access.
+
+### What I changed
+
+- Added `.Rhistory` to `.gitignore`, retaining the `.DS_Store` rule. The local history file was neither modified nor committed.
+- Clarified Node.js/npm prerequisites, the lack of third-party dependencies, offline test inputs, localhost access, and the difference between live import and offline CSV use in README.md.
+- Added regression coverage for malformed quoted CSV returning no match with a useful error.
+- Added hand-calculated team-rate checks using unequal attempt counts (26% attack success, 16% efficiency), another team's excluded counts, and unavailable zero-attempt rates.
+
+### Verification
+
+- `npm test`: all 27 tests passed, with 0 failures.
+- `node --check`: passed for all 8 tracked JavaScript files.
+- `git diff --check`: passed.
+- `git check-ignore .Rhistory .DS_Store`: both files are ignored.
+- Verified the existing contents of `PLANNING_LOG.md` and `.Rhistory` were unchanged.
+
+**Result:** Reduced the risk of committing local history, clarified reproducible setup, and strengthened deterministic regression coverage without removing required fixtures or historical documentation.
