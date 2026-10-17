@@ -11,7 +11,6 @@
   const errors = document.getElementById("errors");
   const emptyState = document.getElementById("empty-state");
   const report = document.getElementById("report");
-  let currentMatch = null;
 
   if (location.protocol === "file:") document.getElementById("server-notice").hidden = false;
 
@@ -149,16 +148,14 @@
   }
 
   function clearReport() {
-    currentMatch = null;
     report.hidden = true;
     emptyState.hidden = false;
   }
 
   function showMatch(match) {
-    currentMatch = match;
-    renderScore(currentMatch);
-    renderTeams(currentMatch);
-    renderPlayer(currentMatch, currentMatch.players[0]);
+    renderScore(match);
+    renderTeams(match);
+    renderPlayer(match, match.players[0]);
     emptyState.hidden = true;
     report.hidden = false;
   }
