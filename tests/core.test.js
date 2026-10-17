@@ -156,3 +156,19 @@ test('team rates use summed attempts and zero-attempt rates are unavailable', ()
   assert.equal(core.attackSuccess(empty), null);
   assert.equal(core.attackEfficiency(empty), null);
 });
+
+test('unknown CSV columns are ignored even when their names repeat', () => {
+  const changed = editRows((headers, rows) => {
+    headers.push('note', 'note');
+    for (const row of rows) row.push('first note', 'second note');
+  });
+  assert.deepEqual(core.parseMatchCsv(changed), core.parseMatchCsv(sample));
+});
+
+test('duplicate required CSV columns are still rejected', () => {
+  const changed = editRows((headers, rows) => {
+    headers.push('points');
+    for (const row of rows) row.push('');
+  });
+  hasError(core.parseMatchCsv(changed), 'points');
+});

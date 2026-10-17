@@ -115,3 +115,19 @@ test('CEV count placeholders remain zero and no-attempt rates remain unavailable
     assert.equal(core.receptionErrorRate(player), null);
   }
 });
+
+test('CEV parser rejects numbered player rows with changed identifiers and column counts', () => {
+  for (const extra of [false, true]) {
+    const changed = fixture.replace(/<tr\b[^>]*>[\s\S]*?<\/tr>/i, (row) => {
+      row = row.replace('GV_elenco_casa_L_Nome_10', 'changed_name');
+      if (extra) return row.replace('</tr>', '<td>0</td></tr>');
+      const cells = [...row.matchAll(/<td\b[^>]*>[\s\S]*?<\/td>/gi)];
+      assert.equal(cells.length, 24);
+      const last = cells[23];
+      return row.slice(0, last.index) + row.slice(last.index + last[0].length);
+    });
+    assert.notEqual(changed, fixture);
+    assert.throws(() => parseCevHtml(changed, sourceUrl),
+      (error) => error instanceof CevImportError && error.code === 'format_changed');
+  }
+});

@@ -11,6 +11,7 @@
   const errors = document.getElementById("errors");
   const emptyState = document.getElementById("empty-state");
   const report = document.getElementById("report");
+  let importVersion = 0;
 
   if (location.protocol === "file:") document.getElementById("server-notice").hidden = false;
 
@@ -147,9 +148,14 @@
     errors.hidden = false;
   }
 
-  function clearReport() {
+  function beginImport() {
+    errors.hidden = true;
     report.hidden = true;
     emptyState.hidden = false;
+    importStatus.textContent = "";
+    cevSubmit.disabled = false;
+    cevSubmit.textContent = "Import match";
+    return ++importVersion;
   }
 
   function showMatch(match) {
@@ -162,8 +168,7 @@
 
   cevForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-    errors.hidden = true;
-    clearReport();
+    const version = beginImport();
     if (location.protocol === "file:") {
       renderErrors([{ row: null, field: "CEV URL", message: "Run npm start and open the local server address before importing a CEV link." }]);
       return;
@@ -178,15 +183,19 @@
         body: JSON.stringify({ url: cevUrl.value }),
       });
       const body = await response.json();
+      if (version !== importVersion) return;
       if (!response.ok) throw new Error(body.error?.message || "Could not import the CEV page.");
       showMatch(body.match);
       importStatus.textContent = `Imported ${body.match.players.length} players.`;
     } catch (error) {
+      if (version !== importVersion) return;
       importStatus.textContent = "";
       renderErrors([{ row: null, field: "CEV URL", message: error.message || "Could not import the CEV page." }]);
     } finally {
-      cevSubmit.disabled = false;
-      cevSubmit.textContent = "Import match";
+      if (version === importVersion) {
+        cevSubmit.disabled = false;
+        cevSubmit.textContent = "Import match";
+      }
     }
   });
 
@@ -194,10 +203,10 @@
     const file = fileInput.files?.[0];
     if (!file) return;
     fileStatus.textContent = file.name;
-    errors.hidden = true;
-    clearReport();
+    const version = beginImport();
     try {
       const text = await file.text();
+      if (version !== importVersion) return;
       const result = core.parseMatchCsv(text);
       if (result.errors.length) {
         renderErrors(result.errors);
@@ -206,6 +215,7 @@
       result.match.source = { type: "csv", name: file.name };
       showMatch(result.match);
     } catch (error) {
+      if (version !== importVersion) return;
       renderErrors([{ row: null, field: "CSV", message: error.message || "Could not read the file" }]);
     }
   });

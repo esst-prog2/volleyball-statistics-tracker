@@ -29,6 +29,36 @@ After the correction:
 
 **Result:** Fixed a specification-compliance issue without breaking the existing CEV match import tests.
 
+
+### Follow-up: Full specification compliance recheck
+
+Rechecked all three active specifications (`cev-match-import`, `match-csv-import`, and `match-statistics-report`) against the application, local server, shared validator/calculations, HTML/CSS, tests, package configuration, samples, saved spike, and repository documentation. Earlier Review 1 findings and verification above describe the original review; this follow-up records the additional audit.
+
+#### Requirements checked
+
+- CSV layout, flexible column order, ignored extra columns, exactly one match and at least one player, row-specific blank fields, team membership and player uniqueness, consecutive sets and a three-set winner, required counts, reception percentages, and statistical consistency are implemented in `src/core.js` (`parseCsv`, `parseMatchCsv`). Existing and new tests exercise valid matches and malformed data.
+- CEV URL restrictions, canonical provenance, bounded retrieval, disabled redirects, required team/table/set identifiers, player field mapping, placeholders, and shared statistical validation are implemented by `src/cev.js` and `server.js`. Existing saved-input and HTTP tests cover these paths without live CEV access.
+- `src/app.js` and `index.html` render the score and sets, sum team counts, label player points, expose player selection and reported reception percentages, calculate rates from counts, and display unavailable zero-attempt rates. The application does not derive team reception quality from rounded player percentages or compare multiple matches.
+
+#### Additional issues and focused corrections
+
+1. **CSV extra columns were not always ignored.** The CSV layout requirement says unknown extra columns are ignored, but `parseMatchCsv` rejected duplicate names even for unknown columns. Limited duplicate-header validation to required columns. Tests verify repeated `note` columns are ignored while duplicate `points` columns still fail.
+2. **Malformed CEV rows could still disappear.** Structural validation requires rejecting malformed player rows. `parsePlayerTable` rejected an unknown player identifier only when the row had exactly 24 cells; changing the identifier and removing or adding a cell silently omitted the player. It now also rejects numbered player-like rows with an unknown identifier. Numeric set-position header rows and Team Totals remain supported. Regression coverage checks both 23- and 25-cell malformed rows, and the saved real-page test protects legitimate headers and summary rows.
+3. **Older asynchronous imports could overwrite newer inputs.** The one-match report requirement says another input replaces the displayed match and invalid input clears it. Both handlers cleared the report initially, but an older fetch or file read could finish later and restore an outdated report or error. `beginImport` now assigns an import version; only the latest import may render results, errors, or completion state. Deferred-promise tests cover late CSV/CEV successes after a newer invalid CSV and a late CEV failure after a newer valid CSV.
+
+Added `tests/app.test.js` to execute the real import handlers and render functions with a minimal DOM substitute. Besides the ordering regressions, it checks score/set rendering, 65 team player points, 41.5% team efficiency, 46.0% player efficiency, unavailable rates, player selection with 47%/21% reception quality, and replacement by a second valid match.
+
+#### Verification and limits
+
+- Before corrections, the new malformed-row, ignored-extra-column, and three asynchronous-ordering cases failed, reproducing the implementation gaps.
+- After corrections, `npm test`: all 34 tests passed, with 0 failures.
+- `node --check` passed for all 9 JavaScript files, including the new application test.
+- `git diff --check` passed.
+- `PLANNING_LOG.md` and `.Rhistory` contents were verified unchanged.
+- DOM-substitute tests validate handler/render behavior, not visual layout or a real browser. No live CEV retrieval was performed, and compatibility with future CEV markup is not guaranteed.
+
+**Follow-up result:** Corrected three additional specification conflicts and expanded regression coverage for the required match-report workflow.
+
 ## Review 2: Unrequested Features and Unnecessary Complexity
 
 **Focus:** Compare the repository with the OpenSpec requirements and look for unrequested features, duplicated functionality, and unnecessary complexity.

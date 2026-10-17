@@ -89,7 +89,7 @@
     for (const column of REQUIRED_COLUMNS) {
       if (!header.includes(column)) errors.push({ row: records[0].line, field: column, message: "Missing required column" });
     }
-    for (const column of new Set(header)) {
+    for (const column of REQUIRED_COLUMNS) {
       if (header.filter((value) => value === column).length > 1) {
         errors.push({ row: records[0].line, field: column, message: "Duplicate column" });
       }

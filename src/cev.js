@@ -114,8 +114,9 @@ function parsePlayerTable(html, tableId, team, side) {
         continue;
       }
 
-      // Reject full player-like rows with an unrecognized name identifier.
-      if (cells.length === 24) {
+      // A numbered player row must not disappear when its column layout changes.
+      const numberedPlayer = /^\d+$/.test(cells[0] ?? "") && !/^\d+$/.test(cells[1] ?? "");
+      if (cells.length === 24 || numberedPlayer) {
         throw new CevImportError(
           "format_changed",
           `A player row in the ${team} table has no recognized name identifier; the CEV page format may have changed.`
