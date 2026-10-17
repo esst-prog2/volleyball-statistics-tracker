@@ -73,3 +73,61 @@ test('HW5: Gabi scored 14 attack points in CEV match 82295', () => {
   assert.equal(gabi.attack_attempts, 26);
   assert.equal(gabi.points, 17);
 });
+test('CEV parser rejects a player row with a changed name identifier', () => {
+  const changedHtml = fixture.replace(
+    'GV_elenco_casa_L_Nome_10',
+    'GV_elenco_casa_L_Changed_10'
+  );
+
+  assert.notEqual(
+    changedHtml,
+    fixture,
+    'Fixture must contain the player identifier'
+  );
+
+  assert.throws(
+    () => parseCevHtml(changedHtml, sourceUrl),
+    /format may have changed|player row|format changed/i
+  );
+});
+test('CEV parser rejects blank counts instead of silently treating them as zero', () => {
+  const changedHtml = fixture.replace(
+    /(<span id="GV_elenco_casa_L_RecTot_10">)-(<\/span>)/,
+    '$1   $2'
+  );
+  assert.notEqual(changedHtml, fixture, 'Fixture must contain the reception placeholder');
+  assert.throws(
+    () => parseCevHtml(changedHtml, sourceUrl),
+    (error) => error instanceof CevImportError && error.code === 'format_changed' &&
+      /reception attempts.*BOŠKOVIĆ Tijana/.test(error.message)
+  );
+});
+
+test('CEV count placeholders remain zero and no-attempt rates remain unavailable', () => {
+  for (const placeholder of ['.', '-']) {
+    const html = fixture.replace(
+      /(<span id="GV_elenco_casa_L_RecTot_10">)-(<\/span>)/,
+      `$1${placeholder}$2`
+    );
+    const player = parseCevHtml(html, sourceUrl).players.find((item) => item.name === 'BOŠKOVIĆ Tijana');
+    assert.equal(player.reception_attempts, 0);
+    assert.equal(player.reception_positive_pct, null);
+    assert.equal(core.receptionErrorRate(player), null);
+  }
+});
+
+test('CEV parser rejects numbered player rows with changed identifiers and column counts', () => {
+  for (const extra of [false, true]) {
+    const changed = fixture.replace(/<tr\b[^>]*>[\s\S]*?<\/tr>/i, (row) => {
+      row = row.replace('GV_elenco_casa_L_Nome_10', 'changed_name');
+      if (extra) return row.replace('</tr>', '<td>0</td></tr>');
+      const cells = [...row.matchAll(/<td\b[^>]*>[\s\S]*?<\/td>/gi)];
+      assert.equal(cells.length, 24);
+      const last = cells[23];
+      return row.slice(0, last.index) + row.slice(last.index + last[0].length);
+    });
+    assert.notEqual(changed, fixture);
+    assert.throws(() => parseCevHtml(changed, sourceUrl),
+      (error) => error instanceof CevImportError && error.code === 'format_changed');
+  }
+});

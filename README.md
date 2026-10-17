@@ -4,7 +4,7 @@ A local application that imports a real CEV match-statistics page, validates its
 
 ## Run the application
 
-Node.js 20 or newer is required. From the repository terminal, run:
+Node.js 20 or newer, with npm, is required. There are no third-party dependencies to install, so `npm install` is not needed. From the repository terminal, run:
 
 ```bash
 npm start
@@ -18,11 +18,13 @@ https://www-old.cev.eu/Competition-Area/MatchStatistics.aspx?ID=82293
 
 The application makes one request for that public report, parses both teams, and shows the result. Stop the server with **Control+C**. Opening `index.html` directly still permits CSV loading, but CEV importing requires `npm start` because the browser cannot reliably retrieve another site's page itself.
 
-Run all automated checks with:
+Run the automated test suite with:
 
 ```bash
 npm test
 ```
+
+Tests use committed CSV/HTML inputs and mocked CEV responses; they do not contact live websites or require internet access. HTTP tests start a temporary server on `127.0.0.1`, so the environment must permit local port access. Live CEV importing in the application requires internet access; CSV fallback works offline.
 
 ## Why the CEV importer is central
 

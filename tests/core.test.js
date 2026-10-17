@@ -128,3 +128,47 @@ test('CSV format survives a second complete real CEV match', () => {
   assert.equal(antropova.attack_attempts, 49);
   assert.equal(antropova.attack_points, 28);
 });
+
+test('malformed quoted CSV returns a useful error and no match', () => {
+  const result = core.parseMatchCsv(`${sample}\n"unfinished player`);
+  assert.equal(result.match, null);
+  assert.equal(result.errors.length, 1);
+  assert.equal(result.errors[0].field, 'CSV');
+  assert.match(result.errors[0].message, /CSV row \d+: unclosed quoted field/);
+});
+
+test('team rates use summed attempts and zero-attempt rates are unavailable', () => {
+  const empty = {
+    points: 0, serve_attempts: 0, serve_errors: 0, serve_aces: 0,
+    reception_attempts: 0, reception_errors: 0, attack_attempts: 0,
+    attack_errors: 0, attack_blocked: 0, attack_points: 0, block_points: 0,
+  };
+  const match = { players: [
+    { ...empty, team: 'A', attack_attempts: 10, attack_points: 8, attack_errors: 1 },
+    { ...empty, team: 'A', attack_attempts: 90, attack_points: 18, attack_blocked: 9 },
+    { ...empty, team: 'B', attack_attempts: 10, attack_points: 10 },
+  ] };
+  const totals = core.teamTotals(match, 'A');
+  // By hand: 26 / 100 = 26%; (26 - 1 - 9) / 100 = 16%.
+  assert.equal(core.attackSuccess(totals), 26);
+  assert.equal(core.attackEfficiency(totals), 16);
+  assert.equal(core.receptionErrorRate(totals), null);
+  assert.equal(core.attackSuccess(empty), null);
+  assert.equal(core.attackEfficiency(empty), null);
+});
+
+test('unknown CSV columns are ignored even when their names repeat', () => {
+  const changed = editRows((headers, rows) => {
+    headers.push('note', 'note');
+    for (const row of rows) row.push('first note', 'second note');
+  });
+  assert.deepEqual(core.parseMatchCsv(changed), core.parseMatchCsv(sample));
+});
+
+test('duplicate required CSV columns are still rejected', () => {
+  const changed = editRows((headers, rows) => {
+    headers.push('points');
+    for (const row of rows) row.push('');
+  });
+  hasError(core.parseMatchCsv(changed), 'points');
+});

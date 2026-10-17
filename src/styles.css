@@ -19,7 +19,7 @@ a { color: #2457c5; }
 h1, h2, h3, h4, p { margin-top: 0; }
 h1 { margin-bottom: 8px; font-size: clamp(30px, 4vw, 43px); letter-spacing: -.04em; }
 h2 { margin-bottom: 7px; font-size: 23px; letter-spacing: -.025em; }
-.intro, .upload-card p, .section-heading p, .empty-state p { color: #5d6b80; line-height: 1.5; }
+.intro, .section-heading p, .empty-state p { color: #5d6b80; line-height: 1.5; }
 .intro { margin: 0; }
 
 .import-card, .score-card, .team-card, .player-list, .player-detail, .empty-state, .csv-fallback { background: white; border: 1px solid #e0e7f0; border-radius: 20px; box-shadow: 0 5px 20px #223b680a; }
