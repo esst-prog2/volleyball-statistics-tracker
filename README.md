@@ -1,6 +1,6 @@
 # Volleyball Statistics Tracker & Match Analyzer
 
-A local application that imports a real CEV match-statistics page, validates its structure and values, and turns it into a clear one-match report. Paste a supported CEV URL to see the score, set results, team totals, and individual player statistics. A fixed CSV format remains available as an offline fallback.
+My five-minute presentation uses screenshots of the Volleyball Statistics Tracker to follow one match from CSV import to player statistics and a saved report. I load `samples/cev-82293-selected-players.csv` through **Use a CSV instead**, and **Final score** shows VakifBank ISTANBUL winning 3–2 against A. Carraro Prosecco DOC CONEGLIANO across five sets. In **Team statistics**, VakifBank has 65 player points from the selected players in this sample, so these totals cover only part of the team. In **Players**, I select BOŠKOVIĆ Tijana and show her 34 points, 52.4% attack success, and 46.0% attack efficiency. In **Saved matches**, I reopen the same report without uploading the CSV again.
 
 ## Run the application
 

@@ -76,3 +76,5 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-11-07 | Decision: Name the change "Further development" and push it to https://github.com/esst-prog2/volleyball-statistics-tracker on hw6-review. | Decided by: user
 2026-11-07 | Decision: Create a branch containing all completed development. | Decided by: user
 2026-11-07 | Decision: Name the branch further-development, start it at 69db24e, and push it to the previously approved origin repository. | Decided by: assistant
+2026-11-07 | Decision: Review README section 1, record any revision with OpenSpec propose, commit and push it, and submit the same three-to-six-sentence present-tense description for a five-minute screenshot presentation. | Decided by: user
+2026-11-07 | Decision: Use documentation-only OpenSpec change refresh-demo-description; replace the README opening with five sentences following the selected-player CSV through Final score, Team statistics, Players, and Saved matches, using checked 3–2, 65-point, 52.4%, and 46.0% values; skip conditional technical design and specs because runtime behavior is unchanged. | Decided by: assistant
