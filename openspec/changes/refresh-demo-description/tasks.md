@@ -1,8 +1,9 @@
-## 1. Demo description
+## 1. Demo description and evidence
 
-- [x] 1.1 Replace the README opening with five present-tense sentences describing the screenshot path through the sample import, Final score, Team statistics, Players, and Saved matches; verify filenames and labels against the repository.
-- [x] 1.2 Verify the 3–2 score, five sets, 65 selected-player points, and 46.0% attack efficiency against the sample CSV and core calculations, then check that the submission text matches README.md.
+- [x] 1.1 Retrieve CEV reports 82223 and 82229, preserve their HTML, and export full-match CSV samples; verify both parse successfully with 28 players.
+- [x] 1.2 Verify results and MARKOVA Marina’s points and comparison rates against the source counts and core calculations; distinguish match dates from save timestamps.
+- [x] 1.3 Update the README opening to six present-tense sentences naming the real samples and screens, ending with a screenshot of both comparison rows; verify the submission matches the opening paragraph.
 
 ## 2. Delivery
 
-- [x] 2.1 Record the demo decisions in PLANNING_LOG.md, validate the OpenSpec change, commit the documentation, and push further-development to origin; verify the remote branch contains the commit.
+- [x] 2.1 Append the revised demo decisions to PLANNING_LOG.md, validate the OpenSpec change and diff, commit and push further-development, and verify the push succeeds.
