@@ -49,6 +49,21 @@
         </div>
       </details>
 
+      <section class="library-card" aria-labelledby="saved-heading">
+        <h2 id="saved-heading">Saved matches</h2>
+        <p>Successful imports are saved in this browser. Reimporting the same report replaces its saved copy. Clearing browser data removes saved matches.</p>
+        <p id="saved-status" class="file-status" role="status"></p>
+        <div id="saved-matches"></div>
+      </section>
+
+      <section class="library-card" aria-labelledby="comparison-heading">
+        <h2 id="comparison-heading">Compare a player across matches</h2>
+        <p>Players are matched by their exact name. Check the team to distinguish people with the same name. Dates show when you saved each report, not when the match was played.</p>
+        <label for="comparison-player">Player</label>
+        <select id="comparison-player"></select>
+        <div id="comparison-results" class="table-scroll" aria-live="polite"></div>
+      </section>
+
       <section id="errors" class="errors" role="alert" hidden></section>
 
       <section id="empty-state" class="empty-state">

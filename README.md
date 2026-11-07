@@ -26,6 +26,16 @@ npm test
 
 Tests use committed CSV/HTML inputs and mocked CEV responses; they do not contact live websites or require internet access. HTTP tests start a temporary server on `127.0.0.1`, so the environment must permit local port access. Live CEV importing in the application requires internet access; CSV fallback works offline.
 
+## Saved matches and player comparison
+
+Successful CSV and CEV imports are automatically saved in this browser. Use **Saved matches** to reopen a report without fetching CEV again, or delete a saved copy. Reimporting a CEV URL replaces its saved report; identical CSV match data also replaces its saved copy, regardless of filename.
+
+Choose a player under **Compare a player across matches** to see attack success, attack efficiency, and reception error rate for their saved appearances. Matching uses the exact player name; check the team for namesakes. Rows show save times, newest first, rather than match dates. Zero-attempt rates appear as **Unavailable**. Reception error rate also appears in the team and individual report sections.
+
+Saved data stays in browser storage for this address and browser profile. Clearing browser data removes it; it does not sync between devices. If storage is blocked or full, the current report still works and a status message explains that saving failed. Use a stable server address and port to access the same saved library.
+
+Import errors give guidance for correcting URLs or using the CSV fallback when CEV changes its report format. Temporary retrieval failures offer **Retry import**. Unexpected server errors are logged on the server while the browser receives a generic error.
+
 ## Why the CEV importer is central
 
 CEV reports contain useful real-match data, but their HTML structure belongs to an external website and can change. The project therefore has to validate the URL, retrieve the page safely, recognize its structure, normalize placeholders, map two player tables into one internal format, validate the statistics, and fail clearly when the source no longer matches expectations. This is the project's main technical risk and its main contribution.

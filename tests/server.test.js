@@ -99,3 +99,24 @@ test('endpoint reports missing CEV counts and hides upstream exception details',
     });
   }
 });
+
+test('unexpected parser errors preserve their cause and return a logged internal error', async (t) => {
+  const failure = new TypeError('private parser implementation details');
+  const options = {
+    fetchImpl: async () => new Response(fixture),
+    parseImpl: () => { throw failure; },
+  };
+  await assert.rejects(() => importCevPage(sourceUrl, options), (error) => error === failure);
+  const logged = t.mock.method(console, 'error', () => {});
+  await withServer(options, async (base) => {
+    const response = await fetch(`${base}/api/cev-import`, {
+      method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ url: sourceUrl }),
+    });
+    assert.equal(response.status, 500);
+    assert.deepEqual(await response.json(), {
+      error: { code: 'internal_error', message: 'The import failed unexpectedly.' },
+    });
+  });
+  assert.equal(logged.mock.calls.length, 1);
+  assert.equal(logged.mock.calls[0].arguments[1], failure);
+});

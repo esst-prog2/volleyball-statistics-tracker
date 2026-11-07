@@ -172,3 +172,8 @@ test('duplicate required CSV columns are still rejected', () => {
   });
   hasError(core.parseMatchCsv(changed), 'points');
 });
+
+test('reception error rate uses errors divided by reception attempts', () => {
+  // By hand: 5 / 50 * 100 = 10%.
+  assert.equal(core.receptionErrorRate({ reception_errors: 5, reception_attempts: 50 }), 10);
+});

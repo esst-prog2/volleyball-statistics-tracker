@@ -60,3 +60,17 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-10-11 | GREEN: Restored cells[21] and ran npm test. Result: 21 passed, 0 failed.
 
 2026-10-11 | Real use: Before checking my tracker, I expected Gabi to have 14 attack points, 26 attack attempts, and 17 total points. After opening match 82295 in the application, I got 14, 26, and 17. All values matched my expectations.
+2026-10-17 | Decision: Create HW6_REVIEW.md in the project root with the supplied HW6 specification-compliance review log. | Decided by: user
+
+2026-10-17 | Decision: Review 2 compares the repository with OpenSpec for unrequested features, duplicated functionality, and unnecessary complexity. | Decided by: user
+2026-10-17 | Decision: Remove redundant currentMatch state from src/app.js, retain the documented import/report features and verification spike, and record Review 2 in HW6_REVIEW.md. | Decided by: assistant
+
+2026-10-17 | Decision: Review 3 examines the whole repository for duplicate implementations, unused functions, obsolete files, and unnecessary dependencies. | Decided by: user
+2026-10-17 | Decision: Remove the unused .upload-card p CSS selector; retain the used helpers, samples, fixtures, archived specifications, and reproducible comparison spike. | Decided by: assistant
+
+2026-11-07 | Decision: Address the teacher feedback by parsing outside the retrieval try block and logging unexpected API import errors while returning internal_error without private details; inject the parser in server tests to verify a TypeError preserves its cause. | Decided by: assistant
+2026-11-07 | Decision: Add the hand-computed reception error rate test: 5 errors in 50 receptions equals 10%. | Decided by: assistant
+2026-11-07 | Decision: Implement all four proposed improvements: visible reception error rates, saved matches, player comparison, and clearer import feedback. | Decided by: user
+2026-11-07 | Decision: Retain existing team/player reception error displays; automatically store successful imports in browser localStorage with reopen/delete controls, replace repeat imports, compare exact player names in a rate table ordered by save time, and offer retries for transient failures. Keep development local in the existing repository. | Decided by: assistant
+2026-11-07 | Decision: Commit all pending project changes and push the current hw6-review branch to origin. | Decided by: user
+2026-11-07 | Decision: Name the change "Further development" and push it to https://github.com/esst-prog2/volleyball-statistics-tracker on hw6-review. | Decided by: user
