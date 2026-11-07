@@ -74,3 +74,5 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-11-07 | Decision: Retain existing team/player reception error displays; automatically store successful imports in browser localStorage with reopen/delete controls, replace repeat imports, compare exact player names in a rate table ordered by save time, and offer retries for transient failures. Keep development local in the existing repository. | Decided by: assistant
 2026-11-07 | Decision: Commit all pending project changes and push the current hw6-review branch to origin. | Decided by: user
 2026-11-07 | Decision: Name the change "Further development" and push it to https://github.com/esst-prog2/volleyball-statistics-tracker on hw6-review. | Decided by: user
+2026-11-07 | Decision: Create a branch containing all completed development. | Decided by: user
+2026-11-07 | Decision: Name the branch further-development, start it at 69db24e, and push it to the previously approved origin repository. | Decided by: assistant
