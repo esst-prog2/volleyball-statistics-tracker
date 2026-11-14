@@ -4,6 +4,10 @@
 
 My five-minute presentation uses screenshots of the Volleyball Statistics Tracker to compare two CEV matches between Savino Del Bene SCANDICCI and VakifBank ISTANBUL. I import match 82223 from 8 January 2026 and match 82229 from 4 February 2026; `samples/cev-82223-full-match.csv` and `samples/cev-82229-full-match.csv` provide offline copies with 28 players each. The **Final score** screenshots show VakifBank winning 3–1 and 3–2, and **Team statistics** shows each team’s totals. In **Players**, I select MARKOVA Marina, who scores 21 points in the first match and 32 in the second. I reopen the reports through **Saved matches** and select her in **Compare a player across matches**, where attack success is 43.2% and 55.6%, attack efficiency is 22.7% and 35.2%, and reception error rate is 11.4% and 2.6%, respectively. The final presentation screenshot shows both comparison rows together, with save times identified separately from the match dates.
 
+## Promo page
+
+Visit the [program promo page](https://esst-prog2.github.io/volleyball-statistics-tracker/) for the match story and try-it instructions. The promo is published from `main` → `docs/` on GitHub Pages. The full CEV importer runs locally as described below.
+
 ## Run the application
 
 Node.js 20 or newer, with npm, is required. There are no third-party dependencies to install, so `npm install` is not needed. From the repository terminal, run:
