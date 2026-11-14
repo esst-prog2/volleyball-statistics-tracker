@@ -69,6 +69,7 @@ async function importCevPage(value, options = {}) {
   const maxBytes = options.maxBytes ?? MAX_CEV_BYTES;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(new Error("timeout")), timeoutMs);
+  let html;
   try {
     const upstream = await fetchImpl(sourceUrl, {
       redirect: "manual",
@@ -79,8 +80,7 @@ async function importCevPage(value, options = {}) {
       throw new CevImportError("redirect_rejected", "CEV redirected this page; the importer did not follow it.");
     }
     if (!upstream.ok) throw new CevImportError("cev_unavailable", `CEV returned HTTP ${upstream.status}.`);
-    const html = await readLimitedResponse(upstream, maxBytes, controller);
-    return parseCevHtml(html, sourceUrl);
+    html = await readLimitedResponse(upstream, maxBytes, controller);
   } catch (error) {
     if (error instanceof CevImportError) throw error;
     if (controller.signal.aborted) throw new CevImportError("cev_timeout", "CEV did not respond before the import timed out.");
@@ -88,6 +88,7 @@ async function importCevPage(value, options = {}) {
   } finally {
     clearTimeout(timeout);
   }
+  return (options.parseImpl || parseCevHtml)(html, sourceUrl);
 }
 
 function safeStaticPath(urlPath) {
@@ -110,10 +111,11 @@ function createAppServer(options = {}) {
         let body;
         try { body = JSON.parse(raw); } catch { throw new CevImportError("invalid_request", "Send a JSON object containing a CEV URL."); }
         if (!body || typeof body.url !== "string") throw new CevImportError("invalid_request", "A CEV URL is required.");
-        const match = await importCevPage(body.url, { fetchImpl, timeoutMs: options.timeoutMs, maxBytes: options.maxBytes });
+        const match = await importCevPage(body.url, { fetchImpl, timeoutMs: options.timeoutMs, maxBytes: options.maxBytes, parseImpl: options.parseImpl });
         sendJson(response, 200, { match });
       } catch (error) {
         const known = error instanceof CevImportError;
+        if (!known) console.error("Unexpected CEV import failure:", error);
         const status = error.code === "request_too_large" ? 413 : known ? 422 : 500;
         sendJson(response, status, { error: { code: known ? error.code : "internal_error", message: known ? error.message : "The import failed unexpectedly." } });
       }

@@ -1,6 +1,8 @@
 # Volleyball Statistics Tracker & Match Analyzer
 
-A local application that imports a real CEV match-statistics page, validates its structure and values, and turns it into a clear one-match report. Paste a supported CEV URL to see the score, set results, team totals, and individual player statistics. A fixed CSV format remains available as an offline fallback.
+## 1. The demo
+
+My five-minute presentation uses screenshots of the Volleyball Statistics Tracker to compare two CEV matches between Savino Del Bene SCANDICCI and VakifBank ISTANBUL. I import match 82223 from 8 January 2026 and match 82229 from 4 February 2026; `samples/cev-82223-full-match.csv` and `samples/cev-82229-full-match.csv` provide offline copies with 28 players each. The **Final score** screenshots show VakifBank winning 3–1 and 3–2, and **Team statistics** shows each team’s totals. In **Players**, I select MARKOVA Marina, who scores 21 points in the first match and 32 in the second. I reopen the reports through **Saved matches** and select her in **Compare a player across matches**, where attack success is 43.2% and 55.6%, attack efficiency is 22.7% and 35.2%, and reception error rate is 11.4% and 2.6%, respectively. The final presentation screenshot shows both comparison rows together, with save times identified separately from the match dates.
 
 ## Run the application
 
@@ -25,6 +27,16 @@ npm test
 ```
 
 Tests use committed CSV/HTML inputs and mocked CEV responses; they do not contact live websites or require internet access. HTTP tests start a temporary server on `127.0.0.1`, so the environment must permit local port access. Live CEV importing in the application requires internet access; CSV fallback works offline.
+
+## Saved matches and player comparison
+
+Successful CSV and CEV imports are automatically saved in this browser. Use **Saved matches** to reopen a report without fetching CEV again, or delete a saved copy. Reimporting a CEV URL replaces its saved report; identical CSV match data also replaces its saved copy, regardless of filename.
+
+Choose a player under **Compare a player across matches** to see attack success, attack efficiency, and reception error rate for their saved appearances. Matching uses the exact player name; check the team for namesakes. Rows show save times, newest first, rather than match dates. Zero-attempt rates appear as **Unavailable**. Reception error rate also appears in the team and individual report sections.
+
+Saved data stays in browser storage for this address and browser profile. Clearing browser data removes it; it does not sync between devices. If storage is blocked or full, the current report still works and a status message explains that saving failed. Use a stable server address and port to access the same saved library.
+
+Import errors give guidance for correcting URLs or using the CSV fallback when CEV changes its report format. Temporary retrieval failures offer **Retry import**. Unexpected server errors are logged on the server while the browser receives a generic error.
 
 ## Why the CEV importer is central
 

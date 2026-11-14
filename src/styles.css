@@ -105,3 +105,15 @@ h2 { margin-bottom: 7px; font-size: 23px; letter-spacing: -.025em; }
   .team-grid, .player-layout { grid-template-columns: 1fr; }
   .team-card-title { min-height: 0; }
 }
+
+.library-card { margin-top: 20px; padding: 24px; background: white; border: 1px solid #e0e7f0; border-radius: 20px; }
+.library-card p { color: #5d6b80; line-height: 1.5; }
+.saved-match { display: flex; gap: 10px; justify-content: space-between; margin-top: 10px; }
+.library-button { padding: 10px 14px; border: 1px solid #bdc9db; border-radius: 10px; background: #f5f7fb; color: #17263d; cursor: pointer; text-align: left; overflow-wrap: anywhere; }
+.library-button:hover { background: #e9effe; }
+.library-button:focus-visible, select:focus-visible { outline: 2px solid #2457c5; outline-offset: 2px; }
+select { max-width: 100%; padding: 10px; margin: 8px 0 16px; font: inherit; border: 1px solid #bdc9db; border-radius: 8px; }
+.table-scroll { overflow-x: auto; }
+.comparison-table { width: 100%; border-collapse: collapse; text-align: left; }
+.comparison-table th, .comparison-table td { padding: 12px; border-bottom: 1px solid #e0e7f0; min-width: 120px; }
+.comparison-table th:first-child { min-width: 230px; }
