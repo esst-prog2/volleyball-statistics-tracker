@@ -87,3 +87,4 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-11-14 | Decision: Use the match-story promo approach with "See more than the final score," Markova's two-match comparison, and local try-it instructions; GitHub Pages hosts the introduction. | Decided by: user
 2026-11-14 | Decision: Draft the promo as one responsive static page using the approved match-story sequence, accessible comparison, and local setup call to action; leave visual choices to the user's generated-variant selection. | Decided by: assistant
 2026-11-14 | Decision: Confirm the promo-page design brief and use code-first working browser variants for landing pages and future showcase pages. | Decided by: user
+2026-11-14 | Decision: Put the static promo page in docs/index.html and inherit the existing application's blue, white and navy identity for three working layout variants; leave the application entry point intact. | Decided by: assistant

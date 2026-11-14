@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Explore volleyball match statistics and compare a player across saved matches. A local tool for fans and amateur players.">
+<title>Volleyball Statistics Tracker — See more than the final score</title>
+<style>
+:root{color-scheme:light;font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#17263d;background:#f5f7fb;--accent:#2457c5;--ink:#17263d;--muted:#51637e;--paper:#fff;--line:#bdc9db}*{box-sizing:border-box}body{margin:0}a{color:var(--accent);text-underline-offset:.2em}a:focus-visible{outline:3px solid var(--accent);outline-offset:5px}::selection{background:#2457c5;color:white}header,main,footer{max-width:1160px;margin:auto;padding:28px 32px}header{display:flex;justify-content:space-between;gap:24px;border-bottom:1px solid var(--line)}header a{font-weight:700}h1{font-size:clamp(2.8rem,6vw,5rem);max-width:12ch;line-height:1.03;letter-spacing:-.035em;text-wrap:balance;margin:0 0 24px}h2{font-size:clamp(1.8rem,3vw,2.8rem);line-height:1.15;letter-spacing:-.025em;text-wrap:balance}p{line-height:1.65;max-width:68ch}section{padding:64px 0}.lead{font-size:1.25rem}.button{display:inline-block;padding:15px 22px;background:var(--accent);color:white;text-decoration:none;font-weight:700;border-radius:8px}.button:hover{background:#1746ad}.actions{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin:28px 0}.comparison{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}.comparison caption{text-align:left;font-size:1.15rem;font-weight:700;padding-bottom:16px}.comparison th,.comparison td{padding:18px 12px;text-align:left;border-bottom:1px solid var(--line)}.comparison th{font-size:.9rem}.table-scroll{overflow-x:auto}.source,.note{font-size:.9rem;color:var(--muted)}.how{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}li{line-height:1.65;margin:14px 0;max-width:68ch}code{background:#e9effe;color:#17263d;padding:3px 6px;border-radius:4px}footer{border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}@media(max-width:650px){header,main,footer{padding-left:22px;padding-right:22px}header{align-items:flex-start;font-size:.9rem}section{padding:42px 0}.comparison th,.comparison td{padding:14px 9px}.comparison{min-width:610px}.lead{font-size:1.1rem}}@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<header><strong>Volleyball Statistics Tracker<br>&amp; Match Analyzer</strong><a href="https://github.com/esst-prog2/volleyball-statistics-tracker">View on GitHub</a></header>
+<main class="promo-page">
+<section class="opening">
+<h1>See more than the final score.</h1>
+<p class="lead">Explore match reports, understand a player’s performance, and compare their saved matches.</p>
+<p>For volleyball fans who want to look beyond the result, and amateur players learning what the numbers mean.</p>
+<div class="actions"><a class="button" href="#try">Try it locally</a><a href="#story">See the match story</a></div>
+</section>
+<section class="story" id="story">
+<h2>One player. Two matches.<br>A different story.</h2>
+<p>Marina Markova plays for VakifBank Istanbul against Scandicci twice. VakifBank wins both matches, but her numbers tell you more.</p>
+<div class="table-scroll" role="region" aria-label="Marina Markova match comparison" tabindex="0">
+<table class="comparison">
+<caption>Marina Markova · VakifBank Istanbul</caption>
+<thead><tr><th scope="col">Match date</th><th scope="col">Points</th><th scope="col">Attack success</th><th scope="col">Attack efficiency</th><th scope="col">Reception error rate</th></tr></thead>
+<tbody><tr><th scope="row">8 January 2026</th><td>21</td><td>43.2%</td><td>22.7%</td><td>11.4%</td></tr><tr><th scope="row">4 February 2026</th><td>32</td><td>55.6%</td><td>35.2%</td><td>2.6%</td></tr></tbody>
+</table></div>
+<p class="source">Source: CEV matches <a href="https://www-old.cev.eu/Competition-Area/MatchStatistics.aspx?ID=82223">82223</a> and <a href="https://www-old.cev.eu/Competition-Area/MatchStatistics.aspx?ID=82229">82229</a>. Full-match CSV copies are included in the project.</p>
+<p><strong>Attack success</strong> is the share of attack attempts that score a point. <strong>Attack efficiency</strong> also accounts for errors and blocked attacks. <strong>Reception error rate</strong> is the share of receptions recorded as errors; lower means fewer errors per reception.</p>
+<p class="note">Two performances illustrate a comparison, not a prediction or a claim about long-term improvement.</p>
+</section>
+<section class="how">
+<h2>Follow the match,<br>then follow the player.</h2>
+<p>Import a supported CEV match-report URL or load a prepared CSV. See the final score, set scores, and team totals. Select a player to explore their statistics.</p>
+<p>Successful imports are saved in your browser, so you can reopen reports and compare the same player across matches.</p>
+<p class="note">No account is needed. Saved reports stay in this browser profile; clearing browser data removes them.</p>
+</section>
+<section class="try" id="try">
+<h2>Pick a match.<br>Find your player.</h2>
+<p>You need Node.js 20 or newer and a modern browser.</p>
+<ol><li><a href="https://github.com/esst-prog2/volleyball-statistics-tracker/archive/refs/heads/main.zip">Download the project ZIP</a> and extract it, or clone the repository.</li><li>Open a terminal in the project folder and run <code>npm start</code>. No dependency installation is needed.</li><li>Open <a href="http://127.0.0.1:3000">http://127.0.0.1:3000</a> in your browser.</li><li>Load <code>samples/cev-82223-full-match.csv</code> and <code>samples/cev-82229-full-match.csv</code>, then choose <strong>MARKOVA Marina</strong> in <strong>Compare a player across matches</strong>.</li></ol>
+<p>You can also paste a supported CEV report URL while the local server is running. CEV importing needs internet access; the included CSV samples work offline.</p>
+<p class="note">GitHub Pages hosts this introduction. Full CEV URL importing runs through the local Node.js server.</p>
+<div class="actions"><a class="button" href="https://github.com/esst-prog2/volleyball-statistics-tracker/archive/refs/heads/main.zip">Download the project</a><a href="https://github.com/esst-prog2/volleyball-statistics-tracker#run-the-application">Read the setup guide</a></div>
+</section>
+</main>
+<footer>Independent student project. Not affiliated with CEV or the teams shown.</footer>
+</body>
+</html>
