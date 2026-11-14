@@ -84,3 +84,4 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-11-14 | Decision: Add "## 1. The demo" above the existing demo paragraph and open and merge a pull request from further-development into main containing the completed development and demo. | Decided by: user
 2026-11-14 | Decision: Build a program promo page with gstack office-hours content and Impeccable shape, generate, and critique; let the user pick a variant; publish on GitHub Pages and push; after each step commit and append its tool actions and user decisions to PROCESS.md. | Decided by: user
 2026-11-14 | Decision: The promo page primarily addresses volleyball fans and amateur players who want to understand match statistics. | Decided by: user
+2026-11-14 | Decision: Use the match-story promo approach with "See more than the final score," Markova's two-match comparison, and local try-it instructions; GitHub Pages hosts the introduction. | Decided by: user
