@@ -1,6 +1,6 @@
 # Promo page design brief — shape
 
-Status: content approach approved; this brief awaits user confirmation before page generation. No page code is written in this step.
+Status: brief confirmed by the user on 2026-11-14. Code-first variants selected. No page code was written in the shape step.
 
 - **Job and audience:** a public introduction for volleyball fans and amateur players. Visitor mode: Persuade. Help a first-time visitor understand the program and find a realistic way to try it.
 - **Outcome and proof:** lead with “See more than the final score,” followed by the real Marina Markova comparison: 43.2% and 55.6% attack success across the two saved matches. Keep match dates and metric labels visible. Explain the rates in ordinary language and provide a source link.
