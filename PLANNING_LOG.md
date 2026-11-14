@@ -82,3 +82,4 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-11-07 | Decision: Compare MARKOVA Marina in chronological match order; retain both fetched HTML reports and validated 28-player CSV fallback samples, update README and existing OpenSpec proposal to six sentences, and show both comparison rows in a presentation screenshot while distinguishing save times from match dates. | Decided by: assistant
 
 2026-11-14 | Decision: Add "## 1. The demo" above the existing demo paragraph and open and merge a pull request from further-development into main containing the completed development and demo. | Decided by: user
+2026-11-14 | Decision: Build a program promo page with gstack office-hours content and Impeccable shape, generate, and critique; let the user pick a variant; publish on GitHub Pages and push; after each step commit and append its tool actions and user decisions to PROCESS.md. | Decided by: user
