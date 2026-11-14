@@ -89,3 +89,4 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-11-14 | Decision: Confirm the promo-page design brief and use code-first working browser variants for landing pages and future showcase pages. | Decided by: user
 2026-11-14 | Decision: Put the static promo page in docs/index.html and inherit the existing application's blue, white and navy identity for three working layout variants; leave the application entry point intact. | Decided by: assistant
 2026-11-14 | Decision: Generate three complete promo variants within the existing identity: story spotlight (hierarchy), side-by-side story (layout), and compact match report (density), with two adjustable controls each; selection remains the user's decision. | Decided by: assistant
+2026-11-14 | Decision: Accept variant 3, the compact match report, with reading-space and section-title controls both at 1. | Decided by: user
