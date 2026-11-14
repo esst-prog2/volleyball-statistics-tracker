@@ -1,2 +1,5 @@
 .DS_Store
 .Rhistory
+
+# Local Impeccable browser sessions contain temporary credentials.
+.impeccable/live/

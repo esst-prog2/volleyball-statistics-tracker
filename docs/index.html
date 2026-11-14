@@ -23,6 +23,24 @@
 .promo-page .how h2,.promo-page .try h2{font-size:calc(2rem * 1)}
 .promo-page .how p,.promo-page .try p{margin-bottom:12px}
 @media(max-width:650px){.promo-page .opening{padding-top:36px}.promo-page h1{font-size:2.8rem}.promo-page .comparison{min-width:620px}.promo-page .story h2,.promo-page .how h2,.promo-page .try h2{font-size:1.9rem}}
+
+/* Review refinements preserve the accepted compact layout. */
+.table-scroll:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+.takeaway strong{color:var(--accent);font-size:1.2em;font-variant-numeric:tabular-nums}
+summary{cursor:pointer;font-weight:700;padding:14px 0;min-height:44px}
+details{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:24px 0}
+code{overflow-wrap:anywhere}
+@media(max-width:650px){
+.promo-page .comparison{display:block;min-width:0;background:transparent}
+.comparison caption{display:block}
+.comparison thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.comparison tbody{display:block}
+.comparison tbody tr{display:grid;grid-template-columns:1fr 1fr;background:var(--paper);margin-bottom:18px;padding:14px;border:1px solid var(--line);border-radius:8px;gap:4px 18px}
+.promo-page .comparison tbody th{grid-column:1/-1;font-size:1rem;padding:8px 0 14px}
+.promo-page .comparison tbody td{display:flex;flex-direction:column;gap:6px;padding:10px 0;border:0}
+.comparison tbody td::before{content:attr(data-label);font-size:.8rem;font-weight:500;color:var(--muted)}
+.promo-page .comparison tbody td:nth-child(3){font-size:1.25rem}
+}
 </style>
 </head>
 <body>
@@ -32,16 +50,17 @@
   <h1>See more than the final score.</h1>
   <p class="lead">Explore match reports, understand a player’s performance, and compare their saved matches.</p>
   <p>For volleyball fans who want to look beyond the result, and amateur players learning what the numbers mean.</p>
-  <div class="actions"><a class="button" href="#try">Try it locally</a><a href="#story">See the match story</a></div>
+  <div class="actions"><a class="button" href="#try">Try it locally · desktop</a><a href="#story">See the match story</a></div>
   </section>
   <section class="story" id="story">
   <h2>One player. Two matches.<br>A different story.</h2>
   <p>Marina Markova plays for VakifBank Istanbul against Scandicci twice. VakifBank wins both matches, but her numbers tell you more.</p>
+<p class="takeaway">Her attack success goes from <strong>43.2%</strong> to <strong>55.6%</strong>: a higher share of her attacks scores a point in the second match.</p>
   <div class="table-scroll" role="region" aria-label="Marina Markova match comparison" tabindex="0">
   <table class="comparison">
   <caption>Marina Markova · VakifBank Istanbul</caption>
   <thead><tr><th scope="col">Match date</th><th scope="col">Points</th><th scope="col">Attack success</th><th scope="col">Attack efficiency</th><th scope="col">Reception error rate</th></tr></thead>
-  <tbody><tr><th scope="row">8 January 2026</th><td>21</td><td>43.2%</td><td>22.7%</td><td>11.4%</td></tr><tr><th scope="row">4 February 2026</th><td>32</td><td>55.6%</td><td>35.2%</td><td>2.6%</td></tr></tbody>
+  <tbody><tr><th scope="row">8 January 2026</th><td data-label="Points">21</td><td data-label="Attack success">43.2%</td><td data-label="Attack efficiency">22.7%</td><td data-label="Reception error rate">11.4%</td></tr><tr><th scope="row">4 February 2026</th><td data-label="Points">32</td><td data-label="Attack success">55.6%</td><td data-label="Attack efficiency">35.2%</td><td data-label="Reception error rate">2.6%</td></tr></tbody>
   </table></div>
   <p class="source">Source: CEV matches <a href="https://www-old.cev.eu/Competition-Area/MatchStatistics.aspx?ID=82223">82223</a> and <a href="https://www-old.cev.eu/Competition-Area/MatchStatistics.aspx?ID=82229">82229</a>. Full-match CSV copies are included in the project.</p>
   <p><strong>Attack success</strong> is the share of attack attempts that score a point. <strong>Attack efficiency</strong> also accounts for errors and blocked attacks. <strong>Reception error rate</strong> is the share of receptions recorded as errors; lower means fewer errors per reception.</p>
@@ -55,8 +74,9 @@
   </section>
   <section class="try" id="try">
   <h2>Pick a match.<br>Find your player.</h2>
-  <p>You need Node.js 20 or newer and a modern browser.</p>
-  <ol><li><a href="https://github.com/esst-prog2/volleyball-statistics-tracker/archive/refs/heads/main.zip">Download the project ZIP</a> and extract it, or clone the repository.</li><li>Open a terminal in the project folder and run <code>npm start</code>. No dependency installation is needed.</li><li>Open <a href="http://127.0.0.1:3000">http://127.0.0.1:3000</a> in your browser.</li><li>Load <code>samples/cev-82223-full-match.csv</code> and <code>samples/cev-82229-full-match.csv</code>, then choose <strong>MARKOVA Marina</strong> in <strong>Compare a player across matches</strong>.</li></ol>
+  <p>This program runs on your computer. You need a desktop or laptop, <a href="https://nodejs.org/en/download">Node.js 20 or newer</a>, and a modern browser. Install the Node.js LTS version if you do not already have it.</p>
+  <ol><li><a href="https://github.com/esst-prog2/volleyball-statistics-tracker/archive/refs/heads/main.zip">Download the project ZIP</a> and extract it, or clone the repository.</li><li>Open a terminal in the extracted project folder and run <code>npm start</code>. No dependency installation is needed.</li><li>Open <a href="http://127.0.0.1:3000">http://127.0.0.1:3000</a> in your browser.</li><li>Under CSV fallback, load <code>samples/cev-82223-full-match.csv</code>, then load <code>samples/cev-82229-full-match.csv</code>. Each imported match is saved automatically.</li><li>Choose <strong>MARKOVA Marina</strong> in <strong>Compare a player across matches</strong> to see both performances together.</li></ol>
+<details><summary>How do I open a terminal in the project folder?</summary><p><strong>Windows:</strong> open the extracted project folder in File Explorer, type <code>cmd</code> in its address bar, and press Enter.</p><p><strong>macOS:</strong> open Terminal, type <code>cd </code> with a space, drag the extracted project folder into the Terminal window, then press Return.</p><p>Keep that terminal running while you use the app. If the address is already in use, open the address printed by <code>npm start</code> instead.</p></details>
   <p>You can also paste a supported CEV report URL while the local server is running. CEV importing needs internet access; the included CSV samples work offline.</p>
   <p class="note">GitHub Pages hosts this introduction. Full CEV URL importing runs through the local Node.js server.</p>
   <div class="actions"><a class="button" href="https://github.com/esst-prog2/volleyball-statistics-tracker/archive/refs/heads/main.zip">Download the project</a><a href="https://github.com/esst-prog2/volleyball-statistics-tracker#run-the-application">Read the setup guide</a></div>
