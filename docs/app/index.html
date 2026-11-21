@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Volleyball Match Report</title>
+    <link rel="stylesheet" href="src/styles.css">
+    <script src="src/core.js" defer></script>
+    <script src="src/app.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="site-header">
+        <div class="brand-mark" aria-hidden="true">V</div>
+        <div>
+          <p class="eyebrow">VOLLEYBALL STATISTICS TRACKER</p>
+          <h1>Match report</h1>
+          <p class="intro">Load a sample match or choose your own CSV to explore team and player statistics.</p>
+        </div>
+      </header>
+
+      <p><a href="../#story">Back to the match story</a></p>
+
+      <section class="library-card" aria-labelledby="samples-heading">
+        <h2 id="samples-heading">Sample matches</h2>
+        <p>Load both matches, then choose <strong>MARKOVA Marina</strong> under Compare a player across matches.</p>
+        <div class="upload-actions">
+          <button type="button" class="library-button" data-sample-csv="samples/cev-82223-full-match.csv">Load 8 January 2026</button>
+          <button type="button" class="library-button" data-sample-csv="samples/cev-82229-full-match.csv">Load 4 February 2026</button>
+        </div>
+      </section>
+
+      <details class="csv-fallback" open>
+        <summary>Use your own CSV</summary>
+        <p>Choose a CSV in the <a href="https://github.com/esst-prog2/volleyball-statistics-tracker#csv-fallback-format">documented format</a>. The file stays on your device.</p>
+        <div class="upload-actions">
+          <label class="file-button secondary-button" for="csv-file">Choose CSV file</label>
+          <input id="csv-file" type="file" accept=".csv,text/csv" aria-describedby="file-status">
+          <span id="file-status" class="file-status">No file loaded</span>
+        </div>
+      </details>
+
+      <section class="library-card" aria-labelledby="saved-heading">
+        <h2 id="saved-heading">Saved matches</h2>
+        <p>Successful imports are saved in this browser. Reimporting the same report replaces its saved copy. Clearing browser data removes saved matches.</p>
+        <p id="saved-status" class="file-status" role="status"></p>
+        <div id="saved-matches"></div>
+      </section>
+
+      <section class="library-card" aria-labelledby="comparison-heading">
+        <h2 id="comparison-heading">Compare a player across matches</h2>
+        <p>Players are matched by their exact name. Check the team to distinguish people with the same name. Dates show when you saved each report, not when the match was played.</p>
+        <label for="comparison-player">Player</label>
+        <select id="comparison-player"></select>
+        <div id="comparison-results" class="table-scroll" aria-live="polite"></div>
+      </section>
+
+      <section id="errors" class="errors" role="alert" hidden></section>
+
+      <section id="empty-state" class="empty-state">
+        <div class="empty-icon" aria-hidden="true">↗</div>
+        <h2>Your match starts here</h2>
+        <p>Load a sample match or choose a CSV above.</p>
+      </section>
+
+      <div id="report" hidden>
+        <section class="score-card" aria-labelledby="score-heading">
+          <div class="score-header">
+            <p class="eyebrow">MATCH RESULT</p>
+            <h2 id="score-heading">Final score</h2>
+          </div>
+          <div class="score-line">
+            <div class="team-name" id="team-1-name"></div>
+            <div class="set-score"><span id="team-1-sets"></span><span class="score-dash">:</span><span id="team-2-sets"></span></div>
+            <div class="team-name team-name-right" id="team-2-name"></div>
+          </div>
+          <div id="sets" class="sets" aria-label="Set scores"></div>
+          <p id="source" class="source"></p>
+        </section>
+
+        <section class="section-block" aria-labelledby="teams-heading">
+          <div class="section-heading">
+            <div><p class="eyebrow">THE MATCH</p><h2 id="teams-heading">Team statistics</h2></div>
+            <p>Imported player totals. Opponent errors can make set points higher.</p>
+          </div>
+          <div id="team-summary" class="team-grid"></div>
+        </section>
+
+        <section class="section-block" aria-labelledby="players-heading">
+          <div class="section-heading">
+            <div><p class="eyebrow">ON THE COURT</p><h2 id="players-heading">Players</h2></div>
+            <p>Select a player to inspect their match.</p>
+          </div>
+          <div class="player-layout">
+            <div id="player-list" class="player-list" aria-label="Players"></div>
+            <article id="player-detail" class="player-detail" aria-live="polite"></article>
+          </div>
+        </section>
+      </div>
+      <p>To import a CEV report URL, <a href="https://github.com/esst-prog2/volleyball-statistics-tracker#run-the-application">run the app locally with <code>npm start</code></a>.</p>
+    </main>
+  </body>
+</html>

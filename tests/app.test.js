@@ -9,7 +9,7 @@ const app = fs.readFileSync(path.join(__dirname, '../src/app.js'), 'utf8');
 const sample = fs.readFileSync(path.join(__dirname, '../samples/cev-82293-selected-players.csv'), 'utf8');
 
 // Minimal DOM surface for testing the real import handlers and render functions.
-function setup(fetchImpl, storage = new Map()) {
+function setup(fetchImpl, storage = new Map(), demoSamples = []) {
   function node() {
     return {
       hidden: false, textContent: '', children: [], handlers: {}, files: [],
@@ -24,13 +24,16 @@ function setup(fetchImpl, storage = new Map()) {
     if (!nodes.has(id)) nodes.set(id, node());
     return nodes.get(id);
   };
+  const buttons = demoSamples.map(sampleCsv => ({ ...node(), dataset: { sampleCsv } }));
+  const lookup = id => buttons.length && id === 'cev-form' ? null : get(id);
   vm.runInNewContext(app, {
-    VBT: core, document: { getElementById: get, createElement: node },
+    VBT: core, document: { getElementById: lookup, createElement: node, querySelectorAll: () => buttons },
     location: { protocol: 'http:' }, fetch: fetchImpl,
     localStorage: { getItem: key => storage.get(key) ?? null, setItem: (key, value) => storage.set(key, value) },
   });
   return {
     get,
+    buttons,
     storage,
     csv(text) {
       get('csv-file').files = [{ name: 'match.csv', text: () => text }];
@@ -183,4 +186,23 @@ test('timeout offers a working retry while invalid URL gives corrective guidance
   await invalid.cev();
   assert.match(content(invalid.get('errors')), /including its ID/);
   assert.equal(invalid.get('errors').children.some(node => node.textContent === 'Retry import'), false);
+});
+
+test('hosted demo loads both published samples and compares Markova without the CEV form', async () => {
+  const demo = path.join(__dirname, '../docs/app');
+  const html = fs.readFileSync(path.join(demo, 'index.html'), 'utf8');
+  const urls = [...html.matchAll(/data-sample-csv="([^"]+)"/g)].map(match => match[1]);
+  assert.equal(urls.length, 2);
+  assert.equal(fs.readFileSync(path.join(demo, 'src/app.js'), 'utf8'), app);
+  const ui = setup(async url => ({
+    ok: true, text: () => fs.readFileSync(path.join(demo, url), 'utf8'),
+  }), new Map(), urls);
+  for (const button of ui.buttons) await button.handlers.click();
+  assert.equal(ui.get('saved-matches').children.length, 2);
+  const player = ui.get('comparison-player');
+  player.value = 'MARKOVA Marina';
+  player.handlers.change();
+  const comparison = content(ui.get('comparison-results'));
+  assert.match(comparison, /55\.6% 35\.2% 2\.6%/);
+  assert.match(comparison, /43\.2% 22\.7% 11\.4%/);
 });

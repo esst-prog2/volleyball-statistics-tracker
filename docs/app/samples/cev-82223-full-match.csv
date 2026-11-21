@@ -1,0 +1,30 @@
+row_type,team_1,team_2,set_1_team_1,set_1_team_2,set_2_team_1,set_2_team_2,set_3_team_1,set_3_team_2,set_4_team_1,set_4_team_2,set_5_team_1,set_5_team_2,team,player,points,serve_attempts,serve_errors,serve_aces,reception_attempts,reception_errors,reception_positive_pct,reception_excellent_pct,attack_attempts,attack_errors,attack_blocked,attack_points,block_points
+match,Savino Del Bene SCANDICCI,VakifBank ISTANBUL,24,26,22,25,25,17,21,25,,,,,,,,,,,,,,,,,
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,TRABALLI Gaia,0,0,0,0,0,0,,,0,0,0,0,0
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,BECHIS Marta,0,0,0,0,0,0,,,0,0,0,0,0
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,SKINNER Avery,9,13,0,0,31,3,48,13,26,2,3,8,1
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,CASTILLO Brenda,0,0,0,0,0,0,,,0,0,0,0,0
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,RUDDINS Lindsey,0,0,0,0,0,0,,,0,0,0,0,0
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,FRANKLIN Sarah Christina,11,15,0,2,17,0,41,29,16,0,1,6,3
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,RIBECHI Manuela,0,0,0,0,25,2,48,16,0,0,0,0,0
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,BOSETTI Caterina Chiara,2,5,0,0,4,0,75,25,8,0,3,2,0
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,OGNJENOVIC Maja,1,16,0,0,0,0,,,4,0,0,0,1
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,MANCINI Giulia Maria,0,0,0,0,0,0,,,0,0,0,0,0
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,GRAZIANI Emma,4,5,1,1,0,0,,,5,0,1,2,1
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,NWAKALOR Linda Nkiruka,1,8,0,0,0,0,,,6,0,0,1,0
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,ANTROPOVA Ekaterina,30,17,3,5,0,0,,,40,6,3,20,5
+player,,,,,,,,,,,,,Savino Del Bene SCANDICCI,WEITZEL Camilla,9,14,1,1,0,0,,,8,0,0,5,3
+player,,,,,,,,,,,,,VakifBank ISTANBUL,CAZAUTE Héléna,11,13,5,0,27,2,67,30,20,2,3,11,0
+player,,,,,,,,,,,,,VakifBank ISTANBUL,ÖZBAY Cansu,5,18,0,3,0,0,,,3,0,0,2,0
+player,,,,,,,,,,,,,VakifBank ISTANBUL,AYKAÇ ALTINTAŞ Ayça,0,0,0,0,20,3,40,20,0,0,0,0,0
+player,,,,,,,,,,,,,VakifBank ISTANBUL,OZDEN Berka Buse,0,0,0,0,0,0,,,0,0,0,0,0
+player,,,,,,,,,,,,,VakifBank ISTANBUL,OGBOGU Chiaka,7,21,2,0,0,0,,,9,0,0,5,2
+player,,,,,,,,,,,,,VakifBank ISTANBUL,ÇALIŞKAN Sıla,0,0,0,0,0,0,,,0,0,0,0,0
+player,,,,,,,,,,,,,VakifBank ISTANBUL,GERALDO TEIXEIRA Lorenne Maria,0,0,0,0,0,0,,,2,0,0,0,0
+player,,,,,,,,,,,,,VakifBank ISTANBUL,UYANIK Deniz,0,0,0,0,0,0,,,0,0,0,0,0
+player,,,,,,,,,,,,,VakifBank ISTANBUL,ACAR Aylin,0,0,0,0,3,0,67,0,0,0,0,0,0
+player,,,,,,,,,,,,,VakifBank ISTANBUL,CEBECİOĞLU Derya,0,0,0,0,0,0,,,0,0,0,0,0
+player,,,,,,,,,,,,,VakifBank ISTANBUL,GÜNEŞ Zehra,10,13,1,2,1,0,0,0,12,1,1,5,3
+player,,,,,,,,,,,,,VakifBank ISTANBUL,BOŠKOVIĆ Tijana,24,15,3,0,0,0,,,41,2,4,20,4
+player,,,,,,,,,,,,,VakifBank ISTANBUL,MARKOVA Marina,21,10,4,0,35,4,31,17,44,3,6,19,2
+player,,,,,,,,,,,,,VakifBank ISTANBUL,DANGUBIĆ Katarina,0,2,0,0,2,0,50,0,0,0,0,0,0

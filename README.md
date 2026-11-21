@@ -6,7 +6,9 @@ My five-minute presentation uses screenshots of the Volleyball Statistics Tracke
 
 ## Promo page
 
-Visit the [program promo page](https://esst-prog2.github.io/volleyball-statistics-tracker/) for the match story and try-it instructions. The promo is published from `main` → `docs/` on GitHub Pages. The full CEV importer runs locally as described below.
+Visit the [program promo page](https://esst-prog2.github.io/volleyball-statistics-tracker/) for the match story, or open the [browser demo](https://esst-prog2.github.io/volleyball-statistics-tracker/app/) to load the two sample matches or your own CSV. Both pages are published from `main` → `docs/` on GitHub Pages. CEV URL importing runs locally as described below.
+
+When changing the shared browser scripts, CSS, or either demo CSV, run `npm run sync:demo` and commit the refreshed files in `docs/app/`.
 
 ## Run the application
 

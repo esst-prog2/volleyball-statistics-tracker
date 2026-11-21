@@ -117,7 +117,7 @@
   }
   renderSaved();
 
-  if (location.protocol === "file:") document.getElementById("server-notice").hidden = false;
+  if (cevForm && location.protocol === "file:") document.getElementById("server-notice").hidden = false;
 
   function element(tag, className, content) {
     const node = document.createElement(tag);
@@ -256,9 +256,11 @@
     errors.hidden = true;
     report.hidden = true;
     emptyState.hidden = false;
-    importStatus.textContent = "";
-    cevSubmit.disabled = false;
-    cevSubmit.textContent = "Import match";
+    if (cevForm) {
+      importStatus.textContent = "";
+      cevSubmit.disabled = false;
+      cevSubmit.textContent = "Import match";
+    }
     return ++importVersion;
   }
 
@@ -271,7 +273,7 @@
     if (save) saveMatch(match);
   }
 
-  cevForm.addEventListener("submit", async (event) => {
+  cevForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const version = beginImport();
     if (location.protocol === "file:") {
@@ -323,24 +325,38 @@
     }
   });
 
-  fileInput.addEventListener("change", async () => {
-    const file = fileInput.files?.[0];
-    if (!file) return;
-    fileStatus.textContent = file.name;
+  async function importCsv(name, readText) {
+    fileStatus.textContent = name;
     const version = beginImport();
     try {
-      const text = await file.text();
+      const text = await readText();
       if (version !== importVersion) return;
       const result = core.parseMatchCsv(text);
       if (result.errors.length) {
         renderErrors(result.errors);
         return;
       }
-      result.match.source = { type: "csv", name: file.name };
+      result.match.source = { type: "csv", name };
       showMatch(result.match);
     } catch (error) {
       if (version !== importVersion) return;
       renderErrors([{ row: null, field: "CSV", message: error.message || "Could not read the file" }]);
     }
+  }
+
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files?.[0];
+    if (file) return importCsv(file.name, () => file.text());
   });
+
+  for (const button of document.querySelectorAll("[data-sample-csv]")) {
+    button.addEventListener("click", () => {
+      const url = button.dataset.sampleCsv;
+      return importCsv(url.split("/").pop(), async () => {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Could not download the sample. Try again.");
+        return response.text();
+      });
+    });
+  }
 })();

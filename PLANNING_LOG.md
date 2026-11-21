@@ -92,3 +92,6 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-11-14 | Decision: Accept variant 3, the compact match report, with reading-space and section-title controls both at 1. | Decided by: user
 2026-11-14 | Decision: Address critique with novice desktop setup guidance, a Node.js download link and terminal disclosure, labeled mobile comparison rows, a clear attack-success takeaway, and explicit region focus; publish only docs/ from main on GitHub Pages. | Decided by: assistant
 2026-11-14 | Decision: Enable GitHub Pages for the public repository at https://esst-prog2.github.io/volleyball-statistics-tracker/ using main:/docs, and link the promo from README.md. | Decided by: assistant
+
+2026-11-21 | Decision: Publish the CSV app and the two Markova match samples alongside the promo page, keep CEV URL import on npm start, and add spaces before the three hidden section title breaks. | Decided by: user
+2026-11-21 | Decision: Place the demo at app/ under the existing GitHub Pages source, with one-click sample loading through the shared CSV parser and a sync command for published assets. | Decided by: assistant
