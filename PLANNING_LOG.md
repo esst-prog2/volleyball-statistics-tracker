@@ -95,3 +95,8 @@ Use this file to record the plan, decisions, progress, and open items for work i
 
 2026-11-21 | Decision: Publish the CSV app and the two Markova match samples alongside the promo page, keep CEV URL import on npm start, and add spaces before the three hidden section title breaks. | Decided by: user
 2026-11-21 | Decision: Place the demo at app/ under the existing GitHub Pages source, with one-click sample loading through the shared CSV parser and a sync command for published assets. | Decided by: assistant
+
+2026-11-21 | Decision: Use HyperFrames for a 30-second promo video that works without sound, verify a render first, and choose among three distinct ideas before production. | Decided by: user
+2026-11-21 | Decision: Install HyperFrames and FFmpeg in an isolated temporary directory for the render check, with no new tracker dependencies. | Decided by: assistant
+2026-11-21 | Decision: Use the before-and-after video concept and feature Marina Markova. | Decided by: user
+2026-11-21 | Decision: Use the 4 February 2026 VakifBank–Scandicci match for both the original CEV table and tracker captures, and show 32 total points, 30 of 54 attacks scored, and 55.6% attack success. | Decided by: assistant
