@@ -103,3 +103,6 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-11-26 | Decision: Revise the 20–25.5 second hold and commit the HyperFrames source if recoverable. | Decided by: user
 2026-11-26 | Decision: Keep the 30-second runtime and use the hold for a visual breakdown of 54 attacks, with 30 scored, 13 remaining in play, 8 blocked and 3 errors. | Decided by: assistant
 2026-11-26 | Decision: Store the recovered HyperFrames composition and its render assets in video/markova. | Decided by: assistant
+2026-11-26 | Decision: Publish a five-minute reveal.js deck in one HTML file with the five Session 10 topics in order and an extra closing slide, then push and verify it on GitHub Pages. | Decided by: user
+2026-11-26 | Decision: Use the Markova comparison from a real browser run, the Gabi red/green parser check, and the match 82294 rounding spike as presentation evidence. | Decided by: assistant
+2026-11-26 | Decision: Propose match-date ordering as the presentation’s next step and allocate 50, 85, 70, 60 and 35 seconds to the five slides. | Decided by: assistant
