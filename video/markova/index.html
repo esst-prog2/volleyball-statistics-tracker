@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Finding Marina Markova in a match report</title>
+<script src="gsap.min.js"></script>
+<style>
+  * { box-sizing:border-box }
+  body { margin:0; font-family:Arial,sans-serif; color:#17263d }
+  #markova { position:relative; width:1280px; height:720px; overflow:hidden; background:#10223f }
+  .scene { position:absolute; inset:0; overflow:hidden; padding:44px 66px; background:#edf2fb }
+  .dark { background:#10223f; color:#fff }
+  .meta { font-size:20px; font-weight:700; letter-spacing:2px; color:#2457c5; text-transform:uppercase }
+  .dark .meta { color:#a9c9ff }
+  h1 { font-size:63px; line-height:1.04; letter-spacing:-2px; margin:14px 0 24px }
+  p { font-size:26px; line-height:1.25; margin:0 }
+  .table { position:relative; width:1050px; margin:0 auto; overflow:hidden; border:1px solid #adc1e1; border-radius:9px }
+  .table img { display:block; width:100% }
+  #highlight { position:absolute; left:3px; right:3px; top:73.5%; height:6.3%; border:3px solid #1855ca; background:#4080ff22 }
+  .foot { position:absolute; bottom:38px; left:66px }
+  .score { display:block; width:1148px; margin-top:36px; border-radius:14px }
+  .detail { display:grid; grid-template-columns:430px 1fr; gap:34px; align-items:center; padding-top:38px }
+  .detail img { width:684px; display:block; border-radius:14px }
+  .detail h1 { font-size:54px }
+  .stat { margin-top:24px; font-size:22px; color:#415775 }
+  .stat strong { display:block; color:#1748ad; font-size:56px; letter-spacing:-2px; line-height:1.04; margin-bottom:4px }
+  .breakdown h1 { margin-bottom:12px }
+  .bar { display:flex; height:34px; overflow:hidden; border-radius:8px; margin:44px 0 32px }
+  .bar span { flex-basis:0 }
+  .scored { background:#2457c5 }
+  .in-play { background:#a9c9ff }
+  .blocked { background:#ac5b22 }
+  .errors { background:#a93c51 }
+  .outcomes { display:grid; grid-template-columns:repeat(4, 1fr); gap:24px; margin:0 }
+  .outcomes div { border-top:5px solid var(--swatch); padding-top:14px }
+  .outcomes dt { font-size:23px }
+  .outcomes dd { color:#17263d; font-size:52px; font-weight:700; margin:0 0 4px }
+  .outro { display:flex; flex-direction:column; justify-content:center }
+  .outro h1 { max-width:900px; font-size:84px }
+  .outro p { color:#e1eaff; font-size:32px }
+</style>
+</head>
+<body>
+<main id="markova" data-composition-id="markova" data-start="0" data-duration="30" data-width="1280" data-height="720">
+  <section id="before" class="scene clip" data-start="0" data-duration="7" data-track-index="1">
+    <div class="meta">Original CEV report · 4 February 2026</div>
+    <h1>Can you spot Marina Markova?</h1>
+    <div class="table">
+      <img src="cev.png" alt="Original CEV player statistics table">
+      <div id="highlight"></div>
+    </div>
+    <p class="foot" id="before-caption">There she is. How many of her attacks scored?</p>
+  </section>
+  <section id="match" class="scene dark clip" data-start="7" data-duration="5" data-track-index="1">
+    <div class="meta">Volleyball Statistics Tracker</div>
+    <h1>Open the same match.</h1>
+    <img class="score" src="score.png" alt="Tracker final score showing VakifBank winning three sets to two">
+    <p class="foot">Load the February sample, then select Markova under Players.</p>
+  </section>
+  <section id="player" class="scene detail clip" data-start="12" data-duration="8" data-track-index="1">
+    <div>
+      <div class="meta">Player report</div>
+      <h1>Marina Markova</h1>
+      <div class="stat" id="total"><strong>32</strong>total points</div>
+      <div class="stat" id="attacks"><strong>30 of 54</strong>attacks scored</div>
+      <div class="stat" id="rate"><strong>55.6%</strong>attack success</div>
+    </div>
+    <img src="player.png" alt="Markova’s actual player report with serve, reception, attack and block statistics">
+  </section>
+  <section id="breakdown" class="scene breakdown clip" data-start="20" data-duration="5.5" data-track-index="1">
+    <div class="meta">Marina Markova · 4 February 2026</div>
+    <h1>What happened on 54 attacks?</h1>
+    <p>30 scored points. That’s 55.6% of her attempts.</p>
+    <div class="bar" aria-hidden="true">
+      <span class="scored" style="flex-grow:30"></span>
+      <span class="in-play" style="flex-grow:13"></span>
+      <span class="blocked" style="flex-grow:8"></span>
+      <span class="errors" style="flex-grow:3"></span>
+    </div>
+    <dl class="outcomes">
+      <div style="--swatch:#2457c5"><dt>Scored</dt><dd>30</dd></div>
+      <div style="--swatch:#a9c9ff"><dt>Stayed in play</dt><dd>13</dd></div>
+      <div style="--swatch:#ac5b22"><dt>Blocked</dt><dd>8</dd></div>
+      <div style="--swatch:#a93c51"><dt>Errors</dt><dd>3</dd></div>
+    </dl>
+  </section>
+  <section id="end" class="scene dark outro clip" data-start="25.5" data-duration="4.5" data-track-index="1">
+    <div class="meta">Volleyball Statistics Tracker</div>
+    <h1>Find the player behind the score.</h1>
+    <p>Open the browser demo and load the February sample.</p>
+  </section>
+</main>
+<script>
+  window.__timelines = window.__timelines || {};
+  const timeline = gsap.timeline({ paused: true });
+  timeline.from("#highlight", { opacity: 0, duration: 0.3 }, 2.5);
+  timeline.from("#before-caption", { opacity: 0, y: 8, duration: 0.35 }, 3.2);
+  timeline.from(".score", { opacity: 0, y: 18, duration: 0.5 }, 7.05);
+  timeline.from("#total", { opacity: 0, y: 10, duration: 0.45 }, 12.25);
+  timeline.from("#attacks", { opacity: 0, y: 10, duration: 0.45 }, 15.4);
+  timeline.from("#rate", { opacity: 0, y: 10, duration: 0.45 }, 19.1);
+  timeline.from(".bar", { scaleX: 0, transformOrigin: "left", duration: 0.6 }, 20.15);
+  timeline.from(".outcomes div", { opacity: 0, y: 10, duration: 0.35, stagger: 0.16 }, 20.55);
+  timeline.from("#end h1", { opacity: 0, y: 12, duration: 0.45 }, 25.5);
+  timeline.to({}, { duration: 0.1 }, 29.9);
+  window.__timelines.markova = timeline;
+</script>
+</body>
+</html>

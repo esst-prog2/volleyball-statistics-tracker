@@ -100,3 +100,6 @@ Use this file to record the plan, decisions, progress, and open items for work i
 2026-11-21 | Decision: Install HyperFrames and FFmpeg in an isolated temporary directory for the render check, with no new tracker dependencies. | Decided by: assistant
 2026-11-21 | Decision: Use the before-and-after video concept and feature Marina Markova. | Decided by: user
 2026-11-21 | Decision: Use the 4 February 2026 VakifBank–Scandicci match for both the original CEV table and tracker captures, and show 32 total points, 30 of 54 attacks scored, and 55.6% attack success. | Decided by: assistant
+2026-11-26 | Decision: Revise the 20–25.5 second hold and commit the HyperFrames source if recoverable. | Decided by: user
+2026-11-26 | Decision: Keep the 30-second runtime and use the hold for a visual breakdown of 54 attacks, with 30 scored, 13 remaining in play, 8 blocked and 3 errors. | Decided by: assistant
+2026-11-26 | Decision: Store the recovered HyperFrames composition and its render assets in video/markova. | Decided by: assistant
